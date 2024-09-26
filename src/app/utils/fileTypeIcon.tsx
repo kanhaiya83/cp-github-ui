@@ -1,21 +1,20 @@
-import { FaFolder, FaFolderOpen } from "react-icons/fa";
-import {
-  FaRegFile,
-  FaCode,
-  FaImage,
-  FaFileWord,
-  FaFilePdf,
-  FaFileExcel,
-  FaGitAlt,
-  FaJs,
-  FaReact,
-  FaPython,
-  FaHtml5,
-  FaCss3,
-} from "react-icons/fa6";
 import { IconType } from "react-icons";
 import { BiLogoTypescript } from "react-icons/bi";
 import { BsFiletypeTxt } from "react-icons/bs";
+import {
+  FaCode,
+  FaCss3,
+  FaFileExcel,
+  FaFilePdf,
+  FaFileWord,
+  FaGitAlt,
+  FaHtml5,
+  FaImage,
+  FaJs,
+  FaPython,
+  FaReact,
+  FaRegFile,
+} from "react-icons/fa6";
 import { IoMdAlert } from "react-icons/io";
 import { LuFileJson } from "react-icons/lu";
 

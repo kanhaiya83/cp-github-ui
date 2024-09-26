@@ -7,18 +7,27 @@ import { usePathname } from "next/navigation";
 interface SelectBranchProps {
   initialBranch: string;
   path: string;
+  owner: string;
+  repoName: string;
+  branchName: string[];
 }
 
-const SelectBranch: React.FC<SelectBranchProps> = ({ initialBranch,path }) => {
+const SelectBranch: React.FC<SelectBranchProps> = ({
+  initialBranch,
+  path,
+  owner,
+  repoName,
+  branchName,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   console.log(pathname);
-  const branches = ["main", "w"]; // Example branches
+  const branches = branchName; // Example branches
 
   const handleBranchChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBranch = e.target.value;
     // Navigate to the new branch
-    router.push(`/tree/${selectedBranch}/${path}`);
+    router.push(`/${owner}/${repoName}/tree/${selectedBranch}/${path}`);
   };
 
   return (
