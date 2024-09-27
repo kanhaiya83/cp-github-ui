@@ -72,6 +72,19 @@ export const fetchContributor = async (url: string) => {
   }
 };
 
+export const getProjectId = async ({
+  owner,
+  repoName,
+}: {
+  owner: string;
+  repoName: string;
+}) => {
+  console.log(`/${owner}/${repoName}`);
+  const projectIdentifier = encodeURIComponent(`${owner}/${repoName}`);
+  const project = await fetchProject(`/${projectIdentifier}`);
+  return project.id;
+};
+
 export async function getData({
   root,
   owner,
