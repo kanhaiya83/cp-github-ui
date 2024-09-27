@@ -70,3 +70,19 @@ export interface Branch {
   default: boolean;
   web_url: string;
 }
+
+export interface ITagsData {
+  like: number;
+  tasks: string;
+  language: string;
+  dataset_type: string;
+  dataset_size: string;
+  license: string;
+  modalities: string[];
+  format: string;
+  sub_tasks: string;
+  size: string;
+  libraries: string;
+  pandas: string;
+  croissant: string;
+}

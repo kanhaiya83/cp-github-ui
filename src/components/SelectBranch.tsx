@@ -27,7 +27,7 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
   const handleBranchChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBranch = e.target.value;
     // Navigate to the new branch
-    router.push(`/${owner}/${repoName}/tree/${selectedBranch}/${path}`);
+    router.push(`/${owner}/${repoName}/tree/${selectedBranch}/path/${path}`);
   };
 
   return (

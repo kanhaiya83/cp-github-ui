@@ -34,21 +34,38 @@ const copyToClipboard = (code: string) => {
 };
 
 function ReadmeViewer({ readme }: { readme: string }) {
-  const [markdownContent, setMarkdownContent] = useState(readme);
   const [isCopied, setIsCopied] = useState(false);
+  const [markdownContent, setMarkdownContent] = useState(() => {
+    const parts = readme.split(/<hr>/);
+    if (parts.length > 2) {
+      return `${parts[0]}<hr><!-- html start here -->${parts
+        .slice(2)
+        .join("<hr>")}`;
+    }
+    return readme; // Return original if there are not enough <hr> tags
+  });
 
   const renderers: Components = {
     h1: ({ children }) => (
-      <h1 className="text-3xl font-bold my-4">{children}</h1>
+      <h1 className="text-3xl text-white font-bold my-4">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-2xl font-semibold my-3">{children}</h2>
+      <h2 className="text-2xl text-white text-opacity-80 font-semibold my-3">
+        {children}
+      </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl font-medium my-2">{children}</h3>
+      <h3 className="text-xl text-white text-opacity-80 font-medium my-2">
+        {children}
+      </h3>
     ),
-    p: ({ children }) => <p className="my-2 text-gray-700">{children}</p>,
-    ul: ({ children }) => <ul className="list-disc pl-5 my-2">{children}</ul>,
+    a: ({ children }) => (
+      <a className="text-blue-400 hover:text-blue-500 hover:underline">
+        {children}
+      </a>
+    ),
+    p: ({ children }) => <p className="my-2 text-gray-400">{children}</p>,
+    ul: ({ children }) => <ul className=" list-none pl-5 my-2">{children}</ul>,
     ol: ({ children }) => (
       <ol className="list-decimal pl-5 my-2">{children}</ol>
     ),

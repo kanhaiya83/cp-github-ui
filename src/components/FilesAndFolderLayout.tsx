@@ -26,10 +26,10 @@ const FilesAndFolderLayout = ({
       .find(() => true) || null;
 
   return (
-    <div>
-      <div className="flex justify-center items-center mt-10 w-full">
-        <div className="grid w-full  min-h-screen p-4 pb-20 gap-16 sm:p-4 font-[family-name:var(--font-geist-sans)]">
-          <div className="p-4 w-full">
+    <div className="w-full">
+      <div className="flex justify-center items-center w-full">
+        <div className="grid w-full  min-h-screen py-4 pb-20 gap-16 sm:p-4 font-[family-name:var(--font-geist-sans)]">
+          <div className="py-4 w-full">
             <section className="flex justify-between mb-4 items-center flex-wrap gap-10 rounded-none">
               <div className="flex gap-3.5 text-sm leading-none whitespace-nowrap text-neutral-400">
                 <SelectBranch
@@ -43,27 +43,27 @@ const FilesAndFolderLayout = ({
               </div>
               <div className="flex gap-7 items-center">
                 <div className="flex flex-col justify-center items-center self-stretch px-0.5 my-auto w-5 h-5 bg-violet-500 rounded-full border border-solid border-stone-300">
-                  <Image
+                  {/* <Image
                     width={20}
                     height={20}
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/fcbe3e3ea3caef502d6e61008557f88e5260b8eaca2ebcdda7dbe2db92446d24?placeholderIfAbsent=true&apiKey=3ffd321d22914a748ca8bbca39c4d0b3"
                     alt=""
                     className="object-contain z-10 w-5 rounded-full aspect-square"
-                  />
+                  /> */}
                 </div>
                 <p className="self-stretch my-auto text-sm leading-none text-neutral-400">
                   {contributors.length} contributors
                 </p>
                 <button className="flex gap-2 self-stretch px-3 py-1.5 text-sm leading-none rounded-md border border-solid bg-zinc-800 border-zinc-700 text-neutral-400">
-                  <Image
+                  {/* <Image
                     width={20}
                     height={20}
                     loading="lazy"
                     src="https://cdn.builder.io/api/v1/image/assets/TEMP/af336e2f2e3523f0e6773064038bdcad68176605edb845336c948ebe3297d450?placeholderIfAbsent=true&apiKey=3ffd321d22914a748ca8bbca39c4d0b3"
                     alt=""
                     className="object-contain shrink-0 my-auto aspect-[0.73] w-[11px]"
-                  />
+                  /> */}
                   <span className="basis-auto">
                     History: {totalCommits} Commits
                   </span>

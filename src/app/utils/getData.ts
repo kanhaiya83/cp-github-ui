@@ -1,10 +1,11 @@
 import { Branch, Commit, Contributor, FileStructure } from "@/types/type";
 import { axiosInstance } from "./axios";
+import { ITagsData } from "@/types/type";
 
 export const fetchProject = async (url: string) => {
   try {
     const response = await axiosInstance.get(url);
-    console.log(response.data, "response.data");
+    // console.log(response.data, "response.data");
     return response.data;
   } catch (error) {
     console.log(error, "response.error");
@@ -82,15 +83,17 @@ export const getProjectId = async ({
   console.log(`/${owner}/${repoName}`);
   const projectIdentifier = encodeURIComponent(`${owner}/${repoName}`);
   const project = await fetchProject(`/${projectIdentifier}`);
-  return project.id;
+  return project?.id ? project.id : -1;
 };
 
 export async function getData({
-  root,
+  currentBranch,
+  root = [],
   owner,
   repoName,
 }: {
   root: string[];
+  currentBranch: string;
   owner: string;
   repoName: string;
 }) {
@@ -102,7 +105,25 @@ export async function getData({
     totalCommits: number;
     projectId: number;
     branchName: string[];
+    tagsData: ITagsData;
   }
+
+  const tagsData = {
+    like: 28,
+    tasks: "intent classification",
+    language: "english",
+    dataset_type: "text",
+    dataset_size: "1000",
+    license: "MIT",
+    modalities: ["text"],
+    format: "json",
+    sub_tasks: "intent classification",
+    size: "1k-10k",
+    libraries: "datasets",
+    pandas: "pandas",
+    croissant: "croissant +1",
+  };
+
   const defaultReturnValue: DefaultReturnValue = {
     initialBranch: "main",
     data: [],
@@ -111,6 +132,7 @@ export async function getData({
     totalCommits: -1,
     projectId: -1,
     branchName: [],
+    tagsData: tagsData,
   };
   const projectIdentifier = encodeURIComponent(`${owner}/${repoName}`);
   console.log(projectIdentifier, "projectIdentifier");
@@ -128,8 +150,8 @@ export async function getData({
   const branchName: string[] = branches.map((branch) => branch.name);
   defaultReturnValue.branchName = branchName;
 
-  const branch = root[0] || "main";
-  const path = root.length > 1 ? root.slice(1).join("/") : "";
+  const branch = currentBranch || "main";
+  const path = root.join("/") || "";
   defaultReturnValue.initialBranch = branch;
 
   const data: FileStructure[] = await fetchData(

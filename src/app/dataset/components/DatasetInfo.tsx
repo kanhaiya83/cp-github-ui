@@ -1,6 +1,12 @@
 import React from "react";
 
-const DatasetInfo: React.FC = () => {
+const DatasetInfo = ({
+  owner,
+  repoName,
+}: {
+  owner: string;
+  repoName: string;
+}) => {
   return (
     <div className="flex gap-1.5 items-center max-w-full text-xl leading-snug whitespace-nowrap w-[425px]">
       <div className="flex gap-1.5 self-stretch my-auto font-semibold text-white">
@@ -18,10 +24,10 @@ const DatasetInfo: React.FC = () => {
         alt=""
         className="object-contain shrink-0 self-stretch my-auto w-3.5 rounded aspect-square"
       />
-      <span className="self-stretch my-auto text-gray-400">ucirvine</span>
+      <span className="self-stretch my-auto text-gray-400">{owner}</span>
       <div className="flex gap-0.5 self-start mt-1.5">
         <span className="text-gray-300">/</span>
-        <span className="font-semibold text-white">sms_spam</span>
+        <span className="font-semibold text-white">{repoName}</span>
       </div>
       <div className="flex gap-4 self-stretch text-sm leading-none text-center">
         <img

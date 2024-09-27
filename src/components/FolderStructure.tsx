@@ -30,7 +30,7 @@ const FolderStructure = ({
             className="flex items-center gap-4 py-2 px-4 border-b border-zinc-800"
           >
             <Link
-              href={`/${owner}/${repoName}/tree/${branch}/${data.path}`}
+              href={`/${owner}/${repoName}/tree/${branch}/path/${data.path}`}
               className="flex items-center gap-2 w-1/4 min-w-0"
             >
               {data.type === "tree" ? (
