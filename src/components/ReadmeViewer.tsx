@@ -1,8 +1,8 @@
-"use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { IoCopyOutline, IoCopy } from "react-icons/io5";
+import { CopyButton } from "./CopyButton";
 
 const escapeHtml = (str: string) => {
   return str
@@ -29,21 +29,14 @@ const highlightJson = (json: string) => {
     );
 };
 
-const copyToClipboard = (code: string) => {
-  navigator.clipboard.writeText(code);
-};
-
 function ReadmeViewer({ readme }: { readme: string }) {
-  const [isCopied, setIsCopied] = useState(false);
-  const [markdownContent, setMarkdownContent] = useState(() => {
-    const parts = readme.split(/<hr>/);
+  const removeFrontMatter = (readme: string) => {
+    const parts = readme.split("---");
     if (parts.length > 2) {
-      return `${parts[0]}<hr><!-- html start here -->${parts
-        .slice(2)
-        .join("<hr>")}`;
+      return `${parts.slice(2).join("---")}`;
     }
-    return readme; // Return original if there are not enough <hr> tags
-  });
+    return readme;
+  };
 
   const renderers: Components = {
     h1: ({ children }) => (
@@ -83,20 +76,11 @@ function ReadmeViewer({ readme }: { readme: string }) {
       if (language === "json") {
         const highlightedJson = highlightJson(String(children));
         return (
-          <div className="relative p-1">
-            <button
-              onClick={() => {
-                copyToClipboard(code);
-                setIsCopied(true);
-                setTimeout(() => setIsCopied(false), 2000);
-              }}
-              className="absolute right-1 top-1 bg-gray-700 text-white text-xs py-1 px-2 rounded hover:bg-gray-600"
-            >
-              {isCopied ? <IoCopyOutline /> : <IoCopyOutline />}
-            </button>
+          <div className="relative p-1 overflow-x-scroll">
+            <CopyButton code={code} />
             <pre
               {...(props as React.HTMLProps<HTMLPreElement>)}
-              className={`json inline-block p-2 m-1 overflow-x-auto `}
+              className={`json inline-block w-[90%] p-2 m-1`}
             >
               <code
                 className={className}
@@ -108,22 +92,15 @@ function ReadmeViewer({ readme }: { readme: string }) {
       }
 
       return (
-        <div className="relative p-0">
-          {code.includes("\n") ? (
-            <button
-              onClick={() => {
-                copyToClipboard(code);
-                setIsCopied(true);
-                setTimeout(() => setIsCopied(false), 2000);
-              }}
-              className="absolute right-1 top-1 bg-gray-700 text-white text-xs py-1 px-2 rounded hover:bg-gray-600"
-            >
-              {isCopied ? <IoCopyOutline /> : <IoCopyOutline />}
-            </button>
-          ) : null}
+        <div
+          className={`relative p-0 ${
+            code.includes("\n") && "overflow-x-scroll bg-gray-700 text-gray-300"
+          } `}
+        >
+          {code.includes("\n") ? <CopyButton code={code} /> : null}
           <pre
             {...(props as React.HTMLProps<HTMLPreElement>)}
-            className={` inline-block overflow-x-auto p-1 m-0  ${className}`}
+            className={` inline-block p-1 m-0  ${className}`}
           >
             <code className="p-0 inline">{children}</code>
           </pre>
@@ -132,23 +109,11 @@ function ReadmeViewer({ readme }: { readme: string }) {
     },
   };
 
-  useEffect(() => {
-    fetch(readme)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.text();
-      })
-      .then((text) => setMarkdownContent(text))
-      .catch((error) => console.error("Fetch error:", error));
-  }, []);
-
   return (
-    <div>
-      <div className="prose dark:prose-dark max-w-none  text-gray-400 p-4 rounded shadow-md">
+    <div className="w-[90%] mx-auto">
+      <div className="prose dark:prose-dark text-gray-400 p-4 rounded shadow-md">
         <ReactMarkdown remarkPlugins={[remarkGfm]} components={renderers}>
-          {markdownContent}
+          {removeFrontMatter(readme)}
         </ReactMarkdown>
       </div>
     </div>

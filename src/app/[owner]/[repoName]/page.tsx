@@ -48,7 +48,11 @@ const page = async ({
         owner={params.owner}
         repoName={params.repoName}
       >
-        <ReadmeViewer readme={file} />
+        {file ? (
+          <ReadmeViewer readme={file} />
+        ) : (
+          <div>No description found</div>
+        )}
       </HuggingFaceDataset>
     </div>
   );
