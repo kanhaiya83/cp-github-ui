@@ -1,5 +1,4 @@
 import ReadmeViewer from "@/components/ReadmeViewer";
-import HuggingFaceDataset from "./components/HuggingFaceDataset";
 
 const DatasetPage: React.FC = () => {
   const readme = "/README.md";

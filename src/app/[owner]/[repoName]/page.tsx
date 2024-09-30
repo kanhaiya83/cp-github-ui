@@ -1,5 +1,5 @@
 import HuggingFaceDataset from "@/app/dataset/components/HuggingFaceDataset";
-import { fetchFile, getData, getProjectId } from "@/app/utils/getData";
+import { fetchFile, getData } from "@/app/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
 
@@ -10,16 +10,7 @@ const page = async ({
 }) => {
   console.log(params, "params");
 
-  const {
-    data,
-    initialBranch,
-    commits,
-    contributors,
-    totalCommits,
-    projectId,
-    branchName,
-    tagsData,
-  } = await getData({
+  const { projectId, tagsData } = await getData({
     currentBranch: params.branch,
     root: [],
     owner: params.owner,

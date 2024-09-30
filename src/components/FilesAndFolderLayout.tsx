@@ -2,7 +2,6 @@ import FolderStructure from "./FolderStructure";
 import SelectBranch from "./SelectBranch";
 import { FileAndFolderLayoutProps } from "@/types/type";
 import TimeAgo from "./TimeAgo";
-import Image from "next/image";
 
 const FilesAndFolderLayout = ({
   initialBranch,

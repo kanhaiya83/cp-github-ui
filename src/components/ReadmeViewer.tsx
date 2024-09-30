@@ -1,7 +1,6 @@
 import React from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { IoCopyOutline, IoCopy } from "react-icons/io5";
 import { CopyButton } from "./CopyButton";
 
 const escapeHtml = (str: string) => {
@@ -68,7 +67,7 @@ function ReadmeViewer({ readme }: { readme: string }) {
         {children}
       </blockquote>
     ),
-    code({ node, className, children, ...props }) {
+    code({ className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || "");
       const language = match ? match[1] : "";
       const code = String(children);
