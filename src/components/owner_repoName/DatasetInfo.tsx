@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const DatasetInfo = ({
@@ -24,7 +25,9 @@ const DatasetInfo = ({
         alt=""
         className="object-contain shrink-0 self-stretch my-auto w-3.5 rounded aspect-square"
       />
-      <span className="self-stretch my-auto text-gray-400">{owner}</span>
+      <Link href={`/${owner}`} className="self-stretch my-auto text-gray-400">
+        {owner}
+      </Link>
       <div className="flex gap-0.5 self-start mt-1.5">
         <span className="text-gray-300">/</span>
         <span className="font-semibold text-white">{repoName}</span>

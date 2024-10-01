@@ -17,7 +17,7 @@ const FileDownloadButton = ({
     const urlEncodedPath = encodeURIComponent(path);
     try {
       const response = await axios.get(
-        `https://git.clusterprotocol.ai/api/v4/projects/${projectId}/repository/files/${urlEncodedPath}/raw?ref=${branch}`,
+        `${process.env.GIT_REPO_URL_PUBLIC}/projects/${projectId}/repository/files/${urlEncodedPath}/raw?ref=${branch}`,
         {
           responseType: "blob",
         }

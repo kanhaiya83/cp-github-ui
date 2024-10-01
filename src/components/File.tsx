@@ -14,7 +14,7 @@ const File = async ({
 }) => {
   const urlEncodedPath = encodeURIComponent(path);
   const file: IFile = await fetchFile(
-    `/${projectId}/repository/files/${urlEncodedPath}?ref=${branch}`
+    `/projects/${projectId}/repository/files/${urlEncodedPath}?ref=${branch}`
   );
   if (!file) return null;
   return (

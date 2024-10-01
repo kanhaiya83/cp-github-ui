@@ -17,6 +17,7 @@ export interface FileAndFolderLayoutProps {
   totalCommits: number;
   projectId: number;
   branchName: string[];
+  rootPath: string;
 }
 
 export interface IFile {

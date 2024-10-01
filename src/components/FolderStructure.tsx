@@ -12,6 +12,7 @@ const FolderStructure = ({
   repoName,
   commits,
   projectId,
+  rootPath,
 }: {
   treeStructure: FileStructure[];
   branch: string;
@@ -19,6 +20,7 @@ const FolderStructure = ({
   repoName: string;
   commits: Commit[];
   projectId: number;
+  rootPath: string;
 }) => {
   if (treeStructure.length === 0) return <p>No Tree found</p>;
   return (
@@ -30,7 +32,7 @@ const FolderStructure = ({
             className="flex items-center gap-4 py-2 px-4 border-b border-zinc-800"
           >
             <Link
-              href={`/${owner}/${repoName}/tree/${branch}/path/${data.path}`}
+              href={`/${rootPath}/${owner}/${repoName}/tree/${branch}/path/${data.path}`}
               className="flex items-center gap-2 w-1/4 min-w-0"
             >
               {data.type === "tree" ? (

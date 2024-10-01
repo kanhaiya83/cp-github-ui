@@ -14,6 +14,7 @@ const FilesAndFolderLayout = ({
   totalCommits,
   projectId,
   branchName,
+  rootPath,
 }: FileAndFolderLayoutProps) => {
   const latestCommit =
     commits
@@ -34,6 +35,7 @@ const FilesAndFolderLayout = ({
                 <SelectBranch
                   initialBranch={initialBranch}
                   path={path}
+                  rootPath={rootPath}
                   owner={owner}
                   repoName={repoName}
                   branchName={branchName}
@@ -92,6 +94,7 @@ const FilesAndFolderLayout = ({
                         treeStructure={data}
                         branch={initialBranch}
                         owner={owner}
+                        rootPath={rootPath}
                         repoName={repoName}
                         commits={commits}
                         projectId={projectId}

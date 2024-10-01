@@ -1,4 +1,4 @@
-import HuggingFaceDataset from "@/app/dataset/components/HuggingFaceDataset";
+import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
 import { axiosInstance } from "@/app/utils/axios";
 import { getData } from "@/app/utils/getData";
 import FilesAndFolderLayout from "@/components/FilesAndFolderLayout";
@@ -37,6 +37,7 @@ export default async function Page({
       repoName={params.repoName}
       tagsData={tagsData}
       pathname={pathname}
+      rootPath={"dataset"}
     >
       <FilesAndFolderLayout
         initialBranch={initialBranch}
@@ -44,6 +45,7 @@ export default async function Page({
         data={data}
         owner={params.owner}
         repoName={params.repoName}
+        rootPath={"dataset"}
         commits={commits}
         contributors={contributors}
         totalCommits={totalCommits}
@@ -56,15 +58,13 @@ export default async function Page({
 
 export async function generateStaticParams() {
   const project: Project[] = await axiosInstance
-    .get("https://git.clusterprotocol.ai/api/v4/projects")
+    .get("/projects")
     .then((res) => res.data);
 
   const data = await Promise.all(
     project.map(async (project) => {
       let branches: Branch[] | [{ name: string }] = await axiosInstance
-        .get(
-          `https://git.clusterprotocol.ai/api/v4/projects/${project.id}/repository/branches`
-        )
+        .get(`/projects/${project.id}/repository/branches`)
         .then((res) => res.data);
       branches = branches.length ? branches : [{ name: "main" }];
 

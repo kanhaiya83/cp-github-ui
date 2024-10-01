@@ -1,4 +1,4 @@
-import HuggingFaceDataset from "@/app/dataset/components/HuggingFaceDataset";
+import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
 import { getData } from "@/app/utils/getData";
 import FilesAndFolderLayout from "@/components/FilesAndFolderLayout";
 
@@ -37,6 +37,7 @@ export default async function Page({
       repoName={params.repoName}
       tagsData={tagsData}
       pathname={pathname}
+      rootPath={"model"}
     >
       <FilesAndFolderLayout
         initialBranch={initialBranch}
@@ -44,6 +45,7 @@ export default async function Page({
         data={data}
         owner={params.owner}
         repoName={params.repoName}
+        rootPath={"model"}
         commits={commits}
         contributors={contributors}
         totalCommits={totalCommits}

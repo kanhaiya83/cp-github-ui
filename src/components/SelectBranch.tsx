@@ -10,6 +10,7 @@ interface SelectBranchProps {
   owner: string;
   repoName: string;
   branchName: string[];
+  rootPath: string;
 }
 
 const SelectBranch: React.FC<SelectBranchProps> = ({
@@ -18,6 +19,7 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
   owner,
   repoName,
   branchName,
+  rootPath,
 }) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -26,8 +28,14 @@ const SelectBranch: React.FC<SelectBranchProps> = ({
 
   const handleBranchChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedBranch = e.target.value;
+    if (!path) {
+      router.push(`/${rootPath}/${owner}/${repoName}/tree/${selectedBranch}`);
+      return;
+    }
     // Navigate to the new branch
-    router.push(`/${owner}/${repoName}/tree/${selectedBranch}/path/${path}`);
+    router.push(
+      `/${rootPath}/${owner}/${repoName}/tree/${selectedBranch}/path/${path}`
+    );
   };
 
   return (

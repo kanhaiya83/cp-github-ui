@@ -73,6 +73,26 @@ export const fetchContributor = async (url: string) => {
   }
 };
 
+export const fetchProjectByOwner = async (url: string) => {
+  try {
+    const response = await axiosInstance.get(url);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const fetchUser = async (url: string) => {
+  try {
+    const response = await axiosInstance.get(url);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 export const getProjectId = async ({
   owner,
   repoName,
@@ -136,14 +156,14 @@ export async function getData({
   };
   const projectIdentifier = encodeURIComponent(`${owner}/${repoName}`);
   console.log(projectIdentifier, "projectIdentifier");
-  const project = await fetchProject(`${projectIdentifier}`);
+  const project = await fetchProject(`/projects/${projectIdentifier}`);
   if (!project) return defaultReturnValue;
 
   const projectId = project.id;
   defaultReturnValue.projectId = projectId;
 
   const branches: Branch[] = await fetchBranches(
-    `/${projectId}/repository/branches`
+    `/projects/${projectId}/repository/branches`
   );
   if (!branches) return defaultReturnValue;
 
@@ -155,14 +175,14 @@ export async function getData({
   defaultReturnValue.initialBranch = branch;
 
   const data: FileStructure[] = await fetchData(
-    `/${projectId}/repository/tree/?ref=${branch}&path=${path}`
+    `/projects/${projectId}/repository/tree/?ref=${branch}&path=${path}`
   );
   defaultReturnValue.data = data;
   if (!data) return defaultReturnValue;
   const commits: Commit[] = await Promise.all(
     data.map(async (file) => {
       const res = await fetchCommit(
-        `/${projectId}/repository/commits?path=${file.path}&ref_name=${branch}`
+        `/projects/${projectId}/repository/commits?path=${file.path}&ref_name=${branch}`
       );
       return res;
     })
@@ -171,12 +191,12 @@ export async function getData({
   defaultReturnValue.commits = commits;
 
   const allCommits: Commit[] = await fetchAllCommit(
-    `/${projectId}/repository/commits`
+    `/projects/${projectId}/repository/commits`
   );
   defaultReturnValue.totalCommits = allCommits.length;
   if (!allCommits) return defaultReturnValue;
   const contributors: Contributor[] = await fetchContributor(
-    `/${projectId}/repository/contributors`
+    `/projects/${projectId}/repository/contributors`
   );
   if (!contributors) return defaultReturnValue;
   defaultReturnValue.contributors = contributors;

@@ -1,4 +1,5 @@
-import HuggingFaceDataset from "@/app/dataset/components/HuggingFaceDataset";
+import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
+import { axiosInstance } from "@/app/utils/axios";
 import { fetchFile, getData } from "@/app/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
@@ -26,7 +27,7 @@ const page = async ({
   }
   const filePath = encodeURIComponent(`README.md`);
   const file = await fetchFile(
-    `/${projectId}/repository/files/${filePath}/raw?ref=${"main"}`
+    `/projects/${projectId}/repository/files/${filePath}/raw?ref=${"main"}`
   );
 
   const pathname = `/${params.owner}/${params.repoName}`;
@@ -38,6 +39,7 @@ const page = async ({
         pathname={pathname}
         owner={params.owner}
         repoName={params.repoName}
+        rootPath={"model"}
       >
         {file ? (
           <ReadmeViewer readme={file} />
@@ -50,9 +52,9 @@ const page = async ({
 };
 
 export async function generateStaticParams() {
-  const project: Project[] = await fetch(
-    "https://git.clusterprotocol.ai/api/v4/projects"
-  ).then((res) => res.json());
+  const project: Project[] = await axiosInstance
+    .get("/projects")
+    .then((res) => res.data);
 
   return project.map((project) => {
     const owner = project.path_with_namespace.split("/")[0];
