@@ -1,6 +1,6 @@
 import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
-import { axiosInstance } from "@/app/utils/axios";
-import { fetchFile, getData } from "@/app/utils/getData";
+import { axiosInstance } from "@/utils/axios";
+import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
 

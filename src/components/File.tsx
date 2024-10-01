@@ -1,4 +1,4 @@
-import { fetchFile } from "@/app/utils/getData";
+import { fetchFile } from "@/utils/getData";
 import { IFile } from "@/types/type";
 import { filesize } from "filesize";
 import FileDownloadButton from "./FileDownloadButton";

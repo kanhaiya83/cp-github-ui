@@ -1,5 +1,5 @@
 import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
-import { getData } from "@/app/utils/getData";
+import { getData } from "@/utils/getData";
 import FilesAndFolderLayout from "@/components/FilesAndFolderLayout";
 
 export default async function Page({

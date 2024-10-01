@@ -1,4 +1,4 @@
-import getFileIcon from "@/app/utils/fileTypeIcon";
+import getFileIcon from "@/utils/fileTypeIcon";
 import TimeAgo from "@/components/TimeAgo";
 import { Commit, FileStructure } from "@/types/type";
 import Link from "next/link";

@@ -1,4 +1,6 @@
 import React from "react";
+import { Project } from "@/types/project";
+import Link from "next/link";
 
 interface Space {
   id: number;
@@ -10,17 +12,22 @@ interface Space {
   backgroundColor?: string;
 }
 
-interface SpaceCardProps {
+const SpaceCard = ({
+  dataset,
+  space,
+  index,
+  link,
+}: {
+  dataset: Project;
   space: Space;
   index: number;
-}
-
-const SpaceCard: React.FC<SpaceCardProps> = ({ space, index }) => {
+  link: string;
+}) => {
   const isEven = index % 2 === 0;
   const columnClass = isEven ? "w-6/12" : "ml-5 w-6/12";
 
   return (
-    <div className={`flex flex-col w-[45%] max-md:ml-0`}>
+    <Link href={link} className={`flex flex-col w-[45%] max-md:ml-0`}>
       <div className="flex flex-col grow items-center min-h-[176px] max-md:mt-5 max-md:max-w-full">
         <div
           className={`flex overflow-hidden relative flex-col justify-center items-start px-32 py-20 w-full rounded-xl max-w-[513px] min-h-[176px] ${
@@ -68,11 +75,11 @@ const SpaceCard: React.FC<SpaceCardProps> = ({ space, index }) => {
             {space.icon}
           </div>
           <h3 className="overflow-hidden self-center text-2xl font-bold leading-none text-center text-blue-50">
-            {space.title}
+            {dataset.name_with_namespace}
           </h3>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

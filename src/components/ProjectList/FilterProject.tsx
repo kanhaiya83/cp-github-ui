@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { modalities, formats } from "@/app/utils/card";
+import { modalities, formats } from "@/utils/card";
 const FilterProject = () => {
   const [minValue, setMinValue] = useState(20);
   const [maxValue, setMaxValue] = useState(80);

@@ -1,4 +1,8 @@
-import React from "react";
+"use client";
+
+import { Project } from "@/types/project";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import SpaceCard from "./SpaceCard";
 
 interface Space {
@@ -11,70 +15,83 @@ interface Space {
   backgroundColor?: string;
 }
 
-const spaces: Space[] = [
-  {
-    id: 1,
-    // icon: "🧬",
-    icon: "",
-    title: "Synthetic Data Generator",
-    status: "Running",
-    isPinned: true,
-    memberCount: 113,
-    backgroundColor: "bg-orange-600",
-  },
-  {
-    id: 2,
-    // icon: "️⚗",
-    icon: "",
-    title: "distilabel - ArgillaLabeller",
-    status: "Running",
-    isPinned: true,
-    memberCount: 2,
-    backgroundColor: "bg-indigo-600",
-  },
-  {
-    id: 3,
-    // icon: "💨",
-    icon: "",
-    title: "Notus Chat",
-    status: "Paused",
-    isPinned: true,
-    memberCount: 98,
-    backgroundColor: "bg-pink-600",
-  },
-  {
-    id: 4,
-    // icon: "✍✍✍",
-    icon: "",
-    title: "How Good Is Mmmlu For My Language",
-    status: "Running",
-    isPinned: false,
-    memberCount: 4,
-    backgroundColor: "bg-pink-600",
-  },
-  {
-    id: 5,
-    // icon: "🦀",
-    icon: "",
-    title: "Argilla Webhooks Native",
-    status: "Running",
-    isPinned: false,
-    memberCount: 1,
-    backgroundColor: "bg-pink-600",
-  },
-  {
-    id: 6,
-    // icon: "🐠",
-    icon: "",
-    title: "Argilla Webhooks",
-    status: "Sleeping",
-    isPinned: false,
-    memberCount: 2,
-    backgroundColor: "bg-indigo-600",
-  },
-];
-
 const SpacesComponent: React.FC = () => {
+  const [datasetsList, setDataSetList] = useState<Project[]>([]);
+  const spaces: Space[] = [
+    {
+      id: 1,
+      // icon: "🧬",
+      icon: "",
+      title: "Synthetic Data Generator",
+      status: "Running",
+      isPinned: true,
+      memberCount: 113,
+      backgroundColor: "bg-orange-600",
+    },
+    {
+      id: 2,
+      // icon: "️⚗",
+      icon: "",
+      title: "distilabel - ArgillaLabeller",
+      status: "Running",
+      isPinned: true,
+      memberCount: 2,
+      backgroundColor: "bg-indigo-600",
+    },
+    {
+      id: 3,
+      // icon: "💨",
+      icon: "",
+      title: "Notus Chat",
+      status: "Paused",
+      isPinned: true,
+      memberCount: 98,
+      backgroundColor: "bg-pink-600",
+    },
+    {
+      id: 4,
+      // icon: "✍✍✍",
+      icon: "",
+      title: "How Good Is Mmmlu For My Language",
+      status: "Running",
+      isPinned: false,
+      memberCount: 4,
+      backgroundColor: "bg-pink-600",
+    },
+    {
+      id: 5,
+      // icon: "🦀",
+      icon: "",
+      title: "Argilla Webhooks Native",
+      status: "Running",
+      isPinned: false,
+      memberCount: 1,
+      backgroundColor: "bg-pink-600",
+    },
+    {
+      id: 6,
+      // icon: "🐠",
+      icon: "",
+      title: "Argilla Webhooks",
+      status: "Sleeping",
+      isPinned: false,
+      memberCount: 2,
+      backgroundColor: "bg-indigo-600",
+    },
+  ];
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/projects`
+        );
+        setDataSetList(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
   return (
     <section className="flex flex-col mb-10 px-20">
       <header className="flex flex-wrap gap-3 items-center w-full max-md:max-w-full">
@@ -117,8 +134,14 @@ const SpacesComponent: React.FC = () => {
         <div className="flex flex-col w-full max-md:max-w-full">
           <div className="w-full max-md:max-w-full">
             <div className="flex gap-5 flex-wrap w-full">
-              {spaces.map((space, index) => (
-                <SpaceCard key={space.id} space={space} index={index} />
+              {datasetsList.map((dataset, index) => (
+                <SpaceCard
+                  key={dataset.id}
+                  dataset={dataset}
+                  link={`/spaces/${dataset.path_with_namespace}`}
+                  space={spaces[index % spaces.length]}
+                  index={index}
+                />
               ))}
             </div>
           </div>

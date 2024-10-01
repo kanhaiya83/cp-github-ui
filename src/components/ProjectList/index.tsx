@@ -1,11 +1,10 @@
 "use client";
-import ProjectCard from "@/components/ProjectList/ProjectCard";
-import { Project } from "@/types/project";
-import React, { useEffect, useState } from "react";
-import { axiosInstance } from "@/app/utils/axios";
 import FilterProject from "@/components/ProjectList/FilterProject";
+import ProjectCard from "@/components/ProjectList/ProjectCard";
 import SearchProject from "@/components/ProjectList/SearchProject";
+import { Project } from "@/types/project";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const ProjectList = ({ rootPath }: { rootPath: string }) => {
   const [datasetsList, setDataSetList] = useState<Project[]>([]);

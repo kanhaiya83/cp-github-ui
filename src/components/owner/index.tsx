@@ -4,8 +4,8 @@ import SpacesComponent from "@/components/owner/SpacecComponent";
 import ModelList from "@/components/owner/ModelList";
 import { User } from "@/types/user";
 import { Project } from "@/types/project";
-import { fetchProjectByOwner } from "@/app/utils/getData";
-import { fetchUser } from "@/app/utils/getData";
+import { fetchProjectByOwner } from "@/utils/getData";
+import { fetchUser } from "@/utils/getData";
 import DataSetList from "@/components/owner/DataSetList";
 import Header from "@/components/owner_repoName/Header";
 

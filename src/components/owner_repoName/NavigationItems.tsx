@@ -3,39 +3,64 @@ import React from "react";
 interface NavItem {
   label: string;
   icon: string;
+  link?: string;
+  isActive?: boolean;
+  pathFor?: string;
 }
 
-const navItems: NavItem[] = [
-  {
-    label: "Models",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a10fb408381728cc9c2c6b5689b7ae22fdf93494ff6cb234df122c49907bad8c?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-  {
-    label: "Datasets",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/2cebaeb616d9174cad3a34e1c451626044f0f884623474085a53646697e39b3f?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-  {
-    label: "Spaces",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/597c38323a65273d7c424207f4c60e5d61a2a0843df21fe6aaffdfdf65d3b6e2?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-  {
-    label: "Posts",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a280b554d118d30235ac42516136092cf346aee11e70e24daf0f56a82dd46222?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-  {
-    label: "Docs",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/bc985c1d7839845b50961da01acbe1a1b25a291d93883f4c835bf8ac7b56a406?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-  {
-    label: "Solutions",
-    icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/63cc5033381842877cca8a7f531353c38d62650e8dbe0b17e6edd92473e94bfd?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
-  },
-];
-
-const NavigationItems: React.FC = () => {
+const NavigationItems = ({
+  rootPath,
+  pathname,
+}: {
+  rootPath: string;
+  pathname: string;
+}) => {
+  const navItems: NavItem[] = [
+    {
+      label: "Models",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a10fb408381728cc9c2c6b5689b7ae22fdf93494ff6cb234df122c49907bad8c?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Datasets",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/2cebaeb616d9174cad3a34e1c451626044f0f884623474085a53646697e39b3f?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Spaces",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/597c38323a65273d7c424207f4c60e5d61a2a0843df21fe6aaffdfdf65d3b6e2?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Posts",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a280b554d118d30235ac42516136092cf346aee11e70e24daf0f56a82dd46222?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Docs",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/bc985c1d7839845b50961da01acbe1a1b25a291d93883f4c835bf8ac7b56a406?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Solutions",
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/63cc5033381842877cca8a7f531353c38d62650e8dbe0b17e6edd92473e94bfd?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "App",
+      pathFor: "spaces",
+      isActive: pathname === `/${rootPath}${pathname}/tree/main`,
+      link: `/${rootPath}${pathname}/tree/main`,
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a280b554d118d30235ac42516136092cf346aee11e70e24daf0f56a82dd46222?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+    {
+      label: "Files",
+      pathFor: "spaces",
+      isActive: pathname === `/${rootPath}${pathname}/tree/main`,
+      link: `/${rootPath}${pathname}/tree/main`,
+      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/b4fdfc2a4c48b0dacf7a516fb1e7c12ec953f87992842fdaed9e39120f54ef54?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
+    },
+  ];
+  const filteredNavItems = navItems.filter(
+    (item) => (item.pathFor && item.pathFor === rootPath) || !item.pathFor
+  );
   return (
     <nav className="flex flex-wrap gap-4 items-center my-auto max-md:max-w-full">
-      {navItems.map((item, index) => (
+      {filteredNavItems.map((item, index) => (
         <div
           key={index}
           className="flex gap-1.5 self-stretch my-auto text-base text-black whitespace-nowrap"
