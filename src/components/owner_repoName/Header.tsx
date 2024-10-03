@@ -2,7 +2,10 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import NavigationItems from "./NavigationItems";
 
-const Header: React.FC = () => {
+const Header: React.FC<{ rootPath: string; pathname: string }> = ({
+  rootPath,
+  pathname,
+}) => {
   return (
     <header className="flex flex-col justify-center text-white items-center px-16 py-4 w-full max-md:px-5">
       <div className="flex flex-nowrap gap-5 justify-between w-full ">
@@ -18,7 +21,7 @@ const Header: React.FC = () => {
           </div>
           <SearchBar />
         </div>
-        <NavigationItems />
+        <NavigationItems rootPath={rootPath} pathname={pathname} />
       </div>
     </header>
   );

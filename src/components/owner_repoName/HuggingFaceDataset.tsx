@@ -22,12 +22,14 @@ const HuggingFaceDataset = ({
 }) => {
   return (
     <main className="flex flex-col">
-      <Header />
+      <Header rootPath={rootPath} pathname={pathname} />
       <section className="flex flex-col items-center px-20 pt-10 w-full max-md:px-5 max-md:max-w-full">
         <div className="flex flex-col items-start w-full max-w-[1400px] max-md:max-w-full">
           <DatasetInfo owner={owner} repoName={repoName} />
           <DatasetTags tagsData={tagsData} />
-          <DatasetNavigation pathname={pathname} rootPath={rootPath} />
+          {rootPath === "spaces" ? null : (
+            <DatasetNavigation pathname={pathname} rootPath={rootPath} />
+          )}
         </div>
         {children}
       </section>

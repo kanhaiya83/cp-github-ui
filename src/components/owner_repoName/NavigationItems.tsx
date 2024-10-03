@@ -1,5 +1,7 @@
+"use client";
 import React from "react";
-
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 interface NavItem {
   label: string;
   icon: string;
@@ -15,6 +17,7 @@ const NavigationItems = ({
   rootPath: string;
   pathname: string;
 }) => {
+  const currentPath = usePathname();
   const navItems: NavItem[] = [
     {
       label: "Models",
@@ -40,30 +43,34 @@ const NavigationItems = ({
       label: "Solutions",
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/63cc5033381842877cca8a7f531353c38d62650e8dbe0b17e6edd92473e94bfd?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
     },
+  ];
+  const spaceNavItems: NavItem[] = [
     {
       label: "App",
       pathFor: "spaces",
-      isActive: pathname === `/${rootPath}${pathname}/tree/main`,
-      link: `/${rootPath}${pathname}/tree/main`,
+      isActive: currentPath === `/${rootPath}${pathname}`,
+      link: `/${rootPath}${pathname}`,
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/a280b554d118d30235ac42516136092cf346aee11e70e24daf0f56a82dd46222?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
     },
     {
       label: "Files",
       pathFor: "spaces",
-      isActive: pathname === `/${rootPath}${pathname}/tree/main`,
+      isActive: currentPath === `/${rootPath}${pathname}/tree/main`,
       link: `/${rootPath}${pathname}/tree/main`,
       icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/b4fdfc2a4c48b0dacf7a516fb1e7c12ec953f87992842fdaed9e39120f54ef54?apiKey=caf73ded90744adfa0fe2d98abed61c0&",
     },
   ];
-  const filteredNavItems = navItems.filter(
-    (item) => (item.pathFor && item.pathFor === rootPath) || !item.pathFor
-  );
+  console.log(currentPath === `/${rootPath}${pathname}`, "rootPath");
+  const availableItems = rootPath === "spaces" ? spaceNavItems : navItems;
   return (
     <nav className="flex flex-wrap gap-4 items-center my-auto max-md:max-w-full">
-      {filteredNavItems.map((item, index) => (
-        <div
+      {availableItems.map((item, index) => (
+        <Link
           key={index}
-          className="flex gap-1.5 self-stretch my-auto text-base text-black whitespace-nowrap"
+          href={item.link || ""}
+          className={`flex gap-1.5 self-stretch my-auto text-base text-black whitespace-nowrap ${
+            item?.isActive ? "underline" : ""
+          }`}
         >
           <img
             loading="lazy"
@@ -71,8 +78,14 @@ const NavigationItems = ({
             alt=""
             className="object-contain shrink-0 w-4 aspect-square"
           />
-          <span className="my-auto text-white text-base">{item.label}</span>
-        </div>
+          <span
+            className={`my-auto text-white text-base ${
+              item?.isActive ? "underline" : ""
+            }`}
+          >
+            {item.label}
+          </span>
+        </Link>
       ))}
       <span className="self-stretch my-auto text-base text-white">Pricing</span>
       <div className="flex gap-2 self-stretch my-auto">

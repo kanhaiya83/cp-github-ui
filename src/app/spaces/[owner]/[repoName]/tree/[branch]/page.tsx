@@ -37,7 +37,7 @@ export default async function Page({
       repoName={params.repoName}
       tagsData={tagsData}
       pathname={pathname}
-      rootPath={"dataset"}
+      rootPath={"spaces"}
     >
       <FilesAndFolderLayout
         initialBranch={initialBranch}
