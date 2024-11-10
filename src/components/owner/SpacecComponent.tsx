@@ -4,6 +4,7 @@ import { Project } from "@/types/project";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpaceCard from "./SpaceCard";
+import SortButton from "./SortButton";
 
 interface Space {
   id: number;
@@ -17,7 +18,9 @@ interface Space {
 
 const SpacesComponent: React.FC = () => {
   const [datasetsList, setDataSetList] = useState<Project[]>([]);
-  const spaces: Space[] = [
+  // const spaces: Space[] =
+
+  const [spaces, setSpaces] = useState<Space[]>([
     {
       id: 1,
       // icon: "🧬",
@@ -78,7 +81,7 @@ const SpacesComponent: React.FC = () => {
       memberCount: 2,
       backgroundColor: "bg-indigo-600",
     },
-  ];
+  ]);
 
   useEffect(() => {
     (async () => {
@@ -94,7 +97,7 @@ const SpacesComponent: React.FC = () => {
   }, []);
   return (
     <section className="flex flex-col mb-10 px-20">
-      <header className="flex flex-wrap gap-3 items-center w-full max-md:max-w-full">
+      <header className="flex flex-wrap gap-3 items-center py-8 w-full max-md:max-w-full">
         <div className="flex items-center self-stretch my-auto">
           <div className="flex flex-col items-start self-stretch pr-2 my-auto min-h-[18px] w-[26px]">
             <div className="flex overflow-hidden flex-col justify-center min-h-[18px] w-[18px]">
@@ -115,20 +118,16 @@ const SpacesComponent: React.FC = () => {
         </div>
         <div className="flex flex-col self-stretch pl-1 my-auto min-w-[240px] w-[324px]">
           <div className="flex relative items-start w-80 max-w-full">
-            <div className="flex overflow-hidden z-0 flex-col justify-center py-1 pr-3 pl-4 my-auto w-7 bg-white rounded-full border border-solid border-gray-200 border-opacity-70 min-h-[25px]">
-              <div className="flex justify-center items-center w-full">
-                <div className="flex flex-1 shrink self-stretch my-auto w-full basis-0 min-h-[18px]" />
-              </div>
+            <div className="flex  justify-between items-center">
+              <input
+                className="px-7 py-3.5 mt-1.5 text-sm font-semibold bg-gray-900 leading-none rounded-md text-neutral-400 max-md:px-5 max-md:max-w-full"
+                placeholder="search"
+              />
             </div>
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2810e44b7fba6adf180c7d3863ce881e46cb49ddc9a2970058eaead7fb908c0?placeholderIfAbsent=true&apiKey=caf73ded90744adfa0fe2d98abed61c0"
-              alt=""
-              className="object-contain absolute bottom-1.5 left-2 z-0 shrink-0 self-start w-3 h-3 aspect-square"
-            />
           </div>
+          <div></div>
         </div>
-        {/* <SortButton /> */}
+        <SortButton />
       </header>
       <main className="flex flex-col mt-4 w-full max-md:max-w-full">
         <div className="flex flex-col w-full max-md:max-w-full">
