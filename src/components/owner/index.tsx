@@ -7,7 +7,7 @@ import { Project } from "@/types/project";
 import { fetchProjectByOwner } from "@/utils/getData";
 import { fetchUser } from "@/utils/getData";
 import DataSetList from "@/components/owner/DataSetList";
-import Header from "@/components/owner_repoName/Header";
+import Header from "@/components/Header";
 
 const OwnerPage = async ({
   params: { owner },

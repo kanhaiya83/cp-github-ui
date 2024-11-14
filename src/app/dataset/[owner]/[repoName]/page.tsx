@@ -52,11 +52,11 @@ const page = async ({
 };
 
 export async function generateStaticParams() {
-  const project: Project[] = await axiosInstance
+  const projectsResp = await axiosInstance
     .get("/projects")
-    .then((res) => res.data);
-
-  return project.map((project) => {
+    console.log({projectsResp})
+    const projectsData :Project[]= projectsResp.data
+  return projectsData.map((project) => {
     const owner = project.path_with_namespace.split("/")[0];
     const repoName = project.path_with_namespace.split("/")[1];
     // console.log(owner, repoName);

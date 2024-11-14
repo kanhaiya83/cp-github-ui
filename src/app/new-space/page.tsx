@@ -1,6 +1,6 @@
 "use client";
 import FromHeader from "@/components/createFroms/Header";
-import Header from "@/components/owner_repoName/Header";
+import Header from "@/components/Header";
 import Form from "@/components/createFroms/Form";
 
 const page = () => {
