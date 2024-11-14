@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { RiEditLine } from "react-icons/ri";
-import { cn } from "@/utils/clx";
+import { cn } from "@/utils/clsx";
+import { useUpdateUser } from "@/hooks/user";
 import { toast } from "react-toastify";
-import { useCurrentUser, useUpdateUser } from "@/hooks/user";
-
+import { useCurrentUser } from "@/hooks/user";
 interface InputFieldProps {
   field: {
     label: string;

@@ -80,7 +80,7 @@ const CreateAccessToken = () => {
       (permission) => permission.name
     );
     generateAccessTokenMutation({ permissions, name });
-    // router.push("/setting/tokens");
+    router.push("/setting/access-tokens");
   };
 
   return (

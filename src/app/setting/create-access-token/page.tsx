@@ -1,5 +1,5 @@
 import React from "react";
-import CreateAccessToken from "@/components/setting/token-new";
+import CreateAccessToken from "@/components/setting/CreateAccessToken";
 
 const page = () => {
   return (
