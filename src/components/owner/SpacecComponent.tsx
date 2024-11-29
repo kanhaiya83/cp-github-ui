@@ -5,81 +5,67 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpaceCard from "./SpaceCard";
 import SortButton from "./SortButton";
+// import { Space } from "@/types/Space";
 
-interface Space {
-  id: number;
-  icon: string;
-  title: string;
-  status: string;
-  isPinned: boolean;
-  memberCount: number;
-  backgroundColor?: string;
-}
 
 const SpacesComponent: React.FC = () => {
   const [datasetsList, setDataSetList] = useState<Project[]>([]);
   // const spaces: Space[] =
 
-  const [spaces, setSpaces] = useState<Space[]>([
+  const [spaces, setSpaces] = useState<any[]>([
     {
       id: 1,
-      // icon: "🧬",
-      icon: "",
+      icon: "🧬",
       title: "Synthetic Data Generator",
       status: "Running",
       isPinned: true,
-      memberCount: 113,
-      backgroundColor: "bg-orange-600",
+      likes: 113,
+      last_updated:new Date(),
     },
     {
       id: 2,
-      // icon: "️⚗",
-      icon: "",
+      icon: "️⚗",
       title: "distilabel - ArgillaLabeller",
       status: "Running",
       isPinned: true,
-      memberCount: 2,
-      backgroundColor: "bg-indigo-600",
+      likes: 2,
+      last_updated:new Date(),
     },
     {
       id: 3,
-      // icon: "💨",
-      icon: "",
+      icon: "💨",
       title: "Notus Chat",
       status: "Paused",
       isPinned: true,
-      memberCount: 98,
-      backgroundColor: "bg-pink-600",
+      likes: 98,
+      last_updated:new Date(),
     },
     {
       id: 4,
-      // icon: "✍✍✍",
-      icon: "",
+      icon: "✍✍✍",
       title: "How Good Is Mmmlu For My Language",
       status: "Running",
       isPinned: false,
-      memberCount: 4,
-      backgroundColor: "bg-pink-600",
+      likes: 4,
+      last_updated:new Date(),
     },
     {
       id: 5,
-      // icon: "🦀",
-      icon: "",
+      icon: "🦀",
       title: "Argilla Webhooks Native",
       status: "Running",
       isPinned: false,
-      memberCount: 1,
-      backgroundColor: "bg-pink-600",
+      likes: 1,
+      last_updated:new Date(),
     },
     {
       id: 6,
-      // icon: "🐠",
-      icon: "",
+      icon: "🐠",
       title: "Argilla Webhooks",
       status: "Sleeping",
       isPinned: false,
-      memberCount: 2,
-      backgroundColor: "bg-indigo-600",
+      likes: 2,
+      last_updated:new Date(),
     },
   ]);
 
@@ -97,42 +83,35 @@ const SpacesComponent: React.FC = () => {
   }, []);
   return (
     <section className="flex flex-col mb-10 px-20">
-      <header className="flex flex-wrap gap-3 items-center py-8 w-full max-md:max-w-full">
-        <div className="flex items-center self-stretch my-auto">
-          <div className="flex flex-col items-start self-stretch pr-2 my-auto min-h-[18px] w-[26px]">
-            <div className="flex overflow-hidden flex-col justify-center min-h-[18px] w-[18px]">
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d97a81970ad8630d277dd3c1fd49a607e1cad86caf42872cb36ba52530a375c2?placeholderIfAbsent=true&apiKey=caf73ded90744adfa0fe2d98abed61c0"
-                alt=""
-                className="object-contain flex-1 w-full aspect-square"
-              />
-            </div>
+        {/* Search Bar */}
+        <div className="flex items-center justify-between my-4">
+          <input
+            type="text"
+            placeholder="Search spaces..."
+            className=" bg-[#0A090F] border border-[#292830] px-4 py-2 rounded focus:outline-none"
+          />
+          <div className="flex gap-5 items-center text-[#999999]">
+            <p>Browse & ZeroGPU Spaces</p>
+            {/* <button className="bg-[#28272D] border border-[#464549] text-[#999999] px-4 py-2 rounded">
+              Filter
+            </button> */}
+             <input
+            type="text"
+            placeholder="Full-text search"
+            className=" bg-[#28272D] border border-[#464549] px-4 py-2 rounded focus:outline-none"
+          />
+
+
+            <button className="bg-[#28272D] border border-[#464549] text-[#999999] px-4 py-2 rounded flex items-center gap-3">
+              <img src="/icons/arrow.svg" alt="" />
+              Sort: Trending
+            </button>
           </div>
-          <h2 className="self-stretch my-auto text-lg font-semibold leading-loose text-white whitespace-nowrap">
-            spaces
-          </h2>
-          <span className="self-stretch pl-3 my-auto w-10 text-lg leading-loose text-gray-400 whitespace-nowrap">
-            20
-          </span>
         </div>
-        <div className="flex flex-col self-stretch pl-1 my-auto min-w-[240px] w-[324px]">
-          <div className="flex relative items-start w-80 max-w-full">
-            <div className="flex  justify-between items-center">
-              <input
-                className="px-7 py-3.5 mt-1.5 text-sm font-semibold bg-gray-900 leading-none rounded-md text-neutral-400 max-md:px-5 max-md:max-w-full"
-                placeholder="search"
-              />
-            </div>
-          </div>
-          <div></div>
-        </div>
-        <SortButton />
-      </header>
       <main className="flex flex-col mt-4 w-full max-md:max-w-full">
         <div className="flex flex-col w-full max-md:max-w-full">
           <div className="w-full max-md:max-w-full">
-            <div className="flex gap-5 flex-wrap w-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full">
               {datasetsList.map((dataset, index) => (
                 <SpaceCard
                   key={dataset.id}

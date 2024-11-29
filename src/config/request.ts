@@ -5,6 +5,9 @@ import { firebaseAuth } from "./firebase";
 const authenticatedRequest = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
+const publicRequest = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+});
 
 authenticatedRequest.interceptors.request.use(
   async (config) => {
@@ -20,4 +23,4 @@ authenticatedRequest.interceptors.request.use(
   }
 );
 
-export { authenticatedRequest };
+export { authenticatedRequest, publicRequest};

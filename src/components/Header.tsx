@@ -60,48 +60,73 @@ const Header = () => {
       </div>
 
       {/* Button Section */}
-<div className="flex gap-16 items-center hover:underline">
-     <Link className="font-medium" href={"/datasets"}>Datasets</Link>
-<div className="flex justify-center items-center gap-3">
-        {!isUserLoggedIn && (
-          <div className="inline-block p-[1px] rounded-[5px] bg-gradient-to-r from-blue-400 to-purple-500">
-            <button
-              onClick={handleClick}
-              className="bg-black text-white px-6 py-2 rounded-[5px] hover:bg-[#333] transition"
-            >
-              Login
-            </button>
-          </div>
-        )}
-        <div className="flex relative  items-center justify-center gap-2 ">
-          {user && isUserLoggedIn ? (
-            <div
-              className=" cursor-pointer"
-              onClick={() => setIsProfilePopupOpen((prev) => !prev)}
-            >
-              <img
-                src={user?.display_photo || "ass"}
-                alt="Profile Icon"
-                onError={(e) => {
-                  console.error("Image failed to load:", e);
-                }}
-                onLoad={() => {
-                  console.log("Image loaded successfully");
-                }}
-                className="object-contain rounded-full shrink-0 self-start aspect-square w-[52px]"
-              />
-            </div>
-          ) : null}
+      <div className="flex gap-16 items-center hover:underline">
 
-          {isProfilePopupOpen && (
-            <div className="absolute top-14 right-0" ref={popupRef}>
-              <ProfilePopup setIsProfilePopupOpen={setIsProfilePopupOpen} />
+
+{/* Menu Items */}
+<div className="flex gap-8">
+        <ul className="flex items-center space-x-8 text-sm">
+          <li className="relative group cursor-pointer">
+        <Link className="font-semibold" href={"/datasets"}>Datasets</Link>
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+          <li className="relative group cursor-pointer">
+        <Link className="font-semibold" href={"/datasets"}>Models</Link>
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+          <li className="relative group cursor-pointer">
+        <Link className="font-semibold" href={"/datasets"}>Agents</Link>
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+          <li className="relative group cursor-pointer">
+        <Link className="font-semibold" href={"#"}>Pricing</Link>
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
+        </ul>
+      </div>
+
+
+
+        <div className="flex justify-center items-center gap-3">
+          {!isUserLoggedIn && (
+            <div className="inline-block p-[1px] rounded-[5px] bg-gradient-to-r from-blue-400 to-purple-500">
+              <button
+                onClick={handleClick}
+                className="bg-black text-white px-6 py-2 rounded-[5px] hover:bg-[#333] transition"
+              >
+                Login
+              </button>
             </div>
           )}
+          <div className="flex relative  items-center justify-center gap-2 ">
+            {user && isUserLoggedIn ? (
+              <div className="flex items-center space-x-3" 
+              onClick={() => setIsProfilePopupOpen((prev) => !prev)}
+              >
+              <span
+                className="text-sm cursor-pointer hover:text-gray-300"
+              >
+                {user.name}
+              </span>
+              <div className="w-8 h-8 rounded-full overflow-hidden">
+                <img
+                  src={user?.display_photo}
+                  alt="Profile"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            ) : null}
+
+            {isProfilePopupOpen && (
+              <div className="absolute top-14 right-0" ref={popupRef}>
+                <ProfilePopup setIsProfilePopupOpen={setIsProfilePopupOpen} />
+              </div>
+            )}
+          </div>
+          {/* <img src="/asset/logo.svg" alt="Logo" /> */}
         </div>
-        {/* <img src="/asset/logo.svg" alt="Logo" /> */}
-      </div>
-  </div>    </header>
+      </div>    </header>
   );
 };
 

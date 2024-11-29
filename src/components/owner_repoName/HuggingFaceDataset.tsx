@@ -15,7 +15,7 @@ const HuggingFaceDataset = ({
 }: {
   owner: string;
   repoName: string;
-  tagsData: ITagsData;
+  tagsData?: ITagsData;
   pathname: string;
   children: React.ReactNode;
   rootPath: string;
@@ -26,7 +26,7 @@ const HuggingFaceDataset = ({
       <section className="flex flex-col items-center px-20 pt-10 w-full max-md:px-5 max-md:max-w-full">
         <div className="flex flex-col items-start w-full max-w-[1400px] max-md:max-w-full">
           <DatasetInfo owner={owner} repoName={repoName} />
-          <DatasetTags tagsData={tagsData} />
+          {tagsData && <DatasetTags tagsData={tagsData} />}
           {rootPath === "spaces" ? null : (
             <DatasetNavigation pathname={pathname} rootPath={rootPath} />
           )}

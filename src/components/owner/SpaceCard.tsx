@@ -1,16 +1,8 @@
 import React from "react";
 import { Project } from "@/types/project";
 import Link from "next/link";
-
-interface Space {
-  id: number;
-  icon: string;
-  title: string;
-  status: string;
-  isPinned: boolean;
-  memberCount: number;
-  backgroundColor?: string;
-}
+import { FiHeart } from "react-icons/fi";
+import { Space } from "@/types/Space";
 
 const SpaceCard = ({
   dataset,
@@ -24,11 +16,47 @@ const SpaceCard = ({
   link: string;
 }) => {
   const isEven = index % 2 === 0;
-  const columnClass = isEven ? "w-6/12" : "ml-5 w-6/12";
 
   return (
-    <Link href={link} className={`flex flex-col w-[45%] max-md:ml-0`}>
-      <div className="flex flex-col grow items-center min-h-[176px] max-md:mt-5 max-md:max-w-full">
+    <Link href={link}>
+      <div>
+              <div key={space.id} className="relative p-4 overflow-hidden">
+                {/* Top-left Half Border */}
+                <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div>
+
+                {/* Bottom-right Half Border */}
+                <div className="absolute bottom-0 right-0 h-1/2 w-1/2 border-b border-r border-[#62626A] pointer-events-none rounded-r"></div>
+
+                {/* Card Content */}
+                <div className="relative ">
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm border py-0.5 px-4 rounded">
+                      {space.status}
+                    </span>
+                    <div className="flex gap-1 items-center">
+                    <FiHeart className="h-5 w-5" />
+                    <span className="text-gray-400 text-sm"> {space.likes}</span>
+                    </div>
+                    
+                  </div>
+                  <div className="text-6xl my-4 text-center">{space.icon}</div>
+                  <h3 className="font-bold text-lg text-center">{space.title}</h3>
+                </div>
+              </div>
+
+              <div className="flex justify-between items-center">
+                <div className="flex gap-2">
+                  <img src="/asset/Ellipse.svg" alt="" />
+                  <h3>Groq</h3>
+                </div>
+                 <p className="text-gray-400 mt-2">{space.last_updated.toLocaleString()}</p>
+              </div>
+            </div>
+
+
+
+            
+      {/* <div className="flex flex-col grow items-center min-h-[176px] max-md:mt-5 max-md:max-w-full">
         <div
           className={`flex overflow-hidden relative flex-col justify-center items-start px-32 py-20 w-full rounded-xl max-w-[513px] min-h-[176px] ${
             space.backgroundColor || ""
@@ -78,7 +106,7 @@ const SpaceCard = ({
             {dataset.name_with_namespace}
           </h3>
         </div>
-      </div>
+      </div> */}
     </Link>
   );
 };

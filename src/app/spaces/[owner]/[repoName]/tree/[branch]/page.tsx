@@ -35,7 +35,7 @@ export default async function Page({
     <HuggingFaceDataset
       owner={params.owner}
       repoName={params.repoName}
-      tagsData={tagsData}
+      // tagsData={tagsData}
       pathname={pathname}
       rootPath={"spaces"}
     >

@@ -3,6 +3,8 @@ import { axiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
+import Header from "@/components/owner_repoName/Header";
+import SpaceIframe from "./components/SpaceIframe";
 
 const page = async ({
   params,
@@ -34,18 +36,15 @@ const page = async ({
 
   return (
     <div>
+      {/* <Header rootPath="spaces" pathname={pathname}/> */}
       <HuggingFaceDataset
-        tagsData={tagsData}
+        // tagsData={tagsData}
         pathname={pathname}
         owner={params.owner}
         repoName={params.repoName}
         rootPath={"spaces"}
       >
-        {file ? (
-          <ReadmeViewer readme={file} />
-        ) : (
-          <div>No description found</div>
-        )}
+        <SpaceIframe url={`https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!file}/>
       </HuggingFaceDataset>
     </div>
   );

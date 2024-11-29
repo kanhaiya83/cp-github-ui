@@ -6,7 +6,7 @@ import Form from "@/components/createFroms/Form";
 const page = () => {
   return (
     <div>
-      <Header rootPath="" pathname="" />
+      <Header />
       <div className="max-w-3xl mx-auto mt-10 flex flex-col ">
         <FromHeader
           icon={
@@ -50,10 +50,6 @@ const page = () => {
           description="Spaces are Git repositories that host application code for Machine Learning demos. You can build Spaces with Python libraries like Streamlit or Gradio, or using Docker images."
         />
         <Form
-          isSdk={true}
-          isSpaceHardware={true}
-          isShortDescription={true}
-          buttonText="Create Space"
         />
       </div>
     </div>
