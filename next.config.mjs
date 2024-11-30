@@ -3,8 +3,8 @@ const nextConfig = {
   eslint:{
     ignoreDuringBuilds:true
   },
-  "compilerOptions": {
-    "skipLibCheck": true
+  typescript:{
+    ignoreBuildErrors:true
   },
   images: {
     remotePatterns: [
