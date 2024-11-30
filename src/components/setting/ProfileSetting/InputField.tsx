@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { RiEditLine } from "react-icons/ri";
-import { cn } from "@/utils/clsx";
+import { cn } from "@/utils/clx";
 import { useUpdateUser } from "@/hooks/user";
 import { toast } from "react-toastify";
 import { useCurrentUser } from "@/hooks/user";
