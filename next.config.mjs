@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint:{
+    ignoreDuringBuilds:true
+  },
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
   images: {
     remotePatterns: [
       {

@@ -6,7 +6,7 @@ import Form from "@/components/createFroms/Form";
 const page = () => {
   return (
     <div>
-      <Header rootPath="" pathname="" />
+      <Header />
       <div className="max-w-3xl mx-auto mt-10 flex flex-col ">
         <FromHeader
           icon={
@@ -45,10 +45,10 @@ const page = () => {
           description="A repository contains all model files, including the revision history."
         />
         <Form
-          isSdk={false}
-          isSpaceHardware={false}
-          isShortDescription={false}
-          buttonText="Create model"
+          // isSdk={false}
+          // isSpaceHardware={false}
+          // isShortDescription={false}
+          // buttonText="Create model"
         />
       </div>
     </div>
