@@ -3,20 +3,25 @@ import { Project } from "@/types/project";
 import Link from "next/link";
 import { FiHeart } from "react-icons/fi";
 import { Space } from "@/types/Space";
+import { formatDistanceToNow } from "date-fns";
 
 const SpaceCard = ({
-  dataset,
   space,
   index,
   link,
 }: {
-  dataset: Project;
   space: Space;
   index: number;
   link: string;
 }) => {
   const isEven = index % 2 === 0;
-
+  const icons = [
+    "🧬",
+    "💨",
+    "✍",
+    "🦀",
+    "🐠"
+  ]
   return (
     <Link href={link}>
       <div>
@@ -34,22 +39,22 @@ const SpaceCard = ({
                       {space.status}
                     </span>
                     <div className="flex gap-1 items-center">
-                    <FiHeart className="h-5 w-5" />
+                    {/* <FiHeart className="h-5 w-5" /> */}
                     <span className="text-gray-400 text-sm"> {space.likes}</span>
                     </div>
                     
                   </div>
-                  <div className="text-6xl my-4 text-center">{space.icon}</div>
-                  <h3 className="font-bold text-lg text-center">{space.title}</h3>
+                  <div className="text-6xl my-4 text-center">{icons[index]}</div>
+                  <h3 className="font-bold text-lg text-center">{space.name}</h3>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center text-sm">
                 <div className="flex gap-2">
                   <img src="/asset/Ellipse.svg" alt="" />
-                  <h3>Groq</h3>
+                  <h3>{space.user.username}</h3>
                 </div>
-                 <p className="text-gray-400 mt-2">{space.last_updated.toLocaleString()}</p>
+                 <p className="text-gray-400 mt-2 text-sm">created {formatDistanceToNow(space.created_at)} ago</p>
               </div>
             </div>
 

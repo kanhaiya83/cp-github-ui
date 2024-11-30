@@ -5,10 +5,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SpaceCard from "./SpaceCard";
 import SortButton from "./SortButton";
-// import { Space } from "@/types/Space";
+import { Space } from "@/types/Space";
 
 
-const SpacesComponent: React.FC = () => {
+const SpacesComponent = (
+  {
+    data
+  }:
+  {
+    data: Space[]
+  }
+) => {
   const [datasetsList, setDataSetList] = useState<Project[]>([]);
   // const spaces: Space[] =
 
@@ -84,7 +91,7 @@ const SpacesComponent: React.FC = () => {
   return (
     <section className="flex flex-col mb-10 px-20">
         {/* Search Bar */}
-        <div className="flex items-center justify-between my-4">
+        {/* <div className="flex items-center justify-between my-4">
           <input
             type="text"
             placeholder="Search spaces..."
@@ -92,9 +99,9 @@ const SpacesComponent: React.FC = () => {
           />
           <div className="flex gap-5 items-center text-[#999999]">
             <p>Browse & ZeroGPU Spaces</p>
-            {/* <button className="bg-[#28272D] border border-[#464549] text-[#999999] px-4 py-2 rounded">
+            <button className="bg-[#28272D] border border-[#464549] text-[#999999] px-4 py-2 rounded">
               Filter
-            </button> */}
+            </button>
              <input
             type="text"
             placeholder="Full-text search"
@@ -107,17 +114,16 @@ const SpacesComponent: React.FC = () => {
               Sort: Trending
             </button>
           </div>
-        </div>
+        </div> */}
       <main className="flex flex-col mt-4 w-full max-md:max-w-full">
         <div className="flex flex-col w-full max-md:max-w-full">
           <div className="w-full max-md:max-w-full">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full">
-              {datasetsList.map((dataset, index) => (
+              {data.map((spaceData, index) => (
                 <SpaceCard
-                  key={dataset.id}
-                  dataset={dataset}
-                  link={`/spaces/${dataset.path_with_namespace}`}
-                  space={spaces[index % spaces.length]}
+                  key={spaceData.id}
+                  link={`/spaces/${spaceData.path_with_namespace}`}
+                  space={spaceData}
                   index={index}
                 />
               ))}

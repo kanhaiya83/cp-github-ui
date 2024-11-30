@@ -828,11 +828,11 @@ const NewSpaceForm = () => {
 
 
 
-        if (property === "name" && value.length < 3) {
-            error = `Name must be at least 3 characters long.`;
-            console.error(error);
-            return;
-        }
+        // if (property === "name" && value.length < 3) {
+        //     error = `Name must be at least 3 characters long.`;
+        //     console.error(error);
+        //     return;
+        // }
 
 
         setFormState((prevState) => ({

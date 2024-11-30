@@ -9,7 +9,7 @@ const page = async () => {
   const publicSpaces = publicSpacesResponse.data.data
   return <div>
     <Header />
-    <SpaceComponent />
+    <SpaceComponent data={publicSpaces}/>
 
   </div>;
 };
