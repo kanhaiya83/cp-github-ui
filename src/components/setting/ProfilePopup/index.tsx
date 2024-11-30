@@ -17,6 +17,8 @@ const ProfileSettingsWrapper = ({
     { label: "Account Settings", link: "/setting" },
     { label: "Create New Access Token", link: "/setting/create-access-token" },
     { label: "Create Dataset", link: "/datasets/create" },
+    { label: "Create Spaces", link: "/spaces/new" },
+    // { label: "Create Dataset", link: "/datasets/create" },
     { label: "Access Tokens", link: "/setting/access-tokens" },
     { label: "Profile Setting", link: "/setting/profile-setting/avatar" },
 
