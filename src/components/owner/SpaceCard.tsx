@@ -18,8 +18,8 @@ const SpaceCard = ({
 }) => {
   return (
     <Link href={link}>
-      <div className="h-full flex flex-col card-hover-effect">
-              <div key={space.id} className="relative p-4 overflow-hidden flex-1">
+      <div className="h-full flex flex-col card-hover-effect px-4 py-2">
+              <div key={space.id} className="relative overflow-hidden flex-1">
                 {/* Top-left Half Border */}
                 {/* <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div> */}
 
@@ -29,8 +29,11 @@ const SpaceCard = ({
                 {/* Card Content */}
                 <div className="relative ">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm border py-0.5 px-4 rounded">
+                    {/* <span className="text-sm border py-0.5 px-4 rounded">
                       {space.status}
+                    </span> */}
+                    <span className={`text-sm text-xs borderbg-opacity-40 py-[1px] px-2 rounded border ${space.hardware_type.includes("cpu")? "text-blue-300 border-blue-500 bg-blue-800 " : "text-purple-300 border-purple-500 bg-purple-800 "}`}>
+                      {space.hardware_type?.replace("_", " ") || "CPU Basic"}
                     </span>
                     <div className="flex gap-1 items-center">
                     {/* <FiHeart className="h-5 w-5" /> */}

@@ -57,6 +57,7 @@ interface FormState {
     sdk: string;
     sdk_template: string;
     visibility: Visibility;
+    hardware_type: string;
 }
 
 
@@ -809,6 +810,8 @@ const NewSpaceForm = () => {
         sdk: sdkArray[0].value,
         sdk_template: sdkArray[0].template[0].value,
         visibility: "public",
+        hardware_type: "cpu_basic"
+
     });
 
     const updateForm = (property: keyof FormState, value: string) => {
@@ -889,18 +892,18 @@ const NewSpaceForm = () => {
                 </div>
             </div>
             <div className="w-full mb-4">
-                    <label className="block text-[#7B7A7F] mb-1" htmlFor="owner">
-                        Description
-                    </label>
-                    <textarea
-                        id="text"
-                        rows={3}
-                        className="w-full p-2  rounded-md border border-[#414141] focus:outline-none bg-[#000000]"
-                        value={formState.description}
-                        placeholder="Enter a short description for your space..."
-                        onChange={(e) => { updateForm("description", e.target.value) }}
-                    />
-                </div>
+                <label className="block text-[#7B7A7F] mb-1" htmlFor="owner">
+                    Description
+                </label>
+                <textarea
+                    id="text"
+                    rows={3}
+                    className="w-full p-2  rounded-md border border-[#414141] focus:outline-none bg-[#000000]"
+                    value={formState.description}
+                    placeholder="Enter a short description for your space..."
+                    onChange={(e) => { updateForm("description", e.target.value) }}
+                />
+            </div>
             {/* License */}
             <div className="mb-4">
                 <label className="block text-[#7B7A7F]  mb-1" htmlFor="license">
@@ -976,22 +979,26 @@ const NewSpaceForm = () => {
                     <label className="block text-[#CCCCCC] mb-1" htmlFor="hardware">
                         Space hardware
                     </label>
-                    <button className="text-sm bg-[#28272D] border border-[#464549] px-3 rounded">
+                    {/* <button className="text-sm bg-[#28272D] border border-[#464549] px-3 rounded">
                         Free
-                    </button>
+                    </button> */}
                 </div>
                 <select
+                value={formState.hardware_type}
+                onChange={e=>updateForm("hardware_type",e.target.value)}
                     id="hardware"
                     className="w-full p-2 mt-2 rounded-md border border-[#414141] focus:outline-none bg-[#000000] "
                 >
-                    <option value="cpu-basic">CPU basic : 2 vCPU - 16GB</option>
-                    <option value="gpu-basic">GPU basic : 4 vCPU - 32GB</option>
+                    <option value="cpu_basic">CPU basic : 2 vCPU - 8GB</option>
+                    <option value="cpu_medium">CPU medium : 4 vCPU - 16GB</option>
+                    <option value="gpu_basic">A10 GPU basic : 2 vCPU - 16GB</option>
+                    <option value="gpu_medium">A10 GPU medium : 4 vCPU - 32GB</option>
                 </select>
-                <p className="text-xs mt-1 text-[#858585]">
+                {/* <p className="text-xs mt-1 text-[#858585]">
                     You can switch to a different hardware at any time in your Space
                     settings. You will be billed for every minute of uptime on a paid
                     hardware.
-                </p>
+                </p> */}
             </div>
 
             {/* Visibility */}
@@ -1002,8 +1009,8 @@ const NewSpaceForm = () => {
                             type="radio"
                             name="visibility"
                             value="public"
-                            checked={formState.visibility=="public"}
-                    onChange={(e) => { updateForm("visibility", e.target.value) }}
+                            checked={formState.visibility == "public"}
+                            onChange={(e) => { updateForm("visibility", e.target.value) }}
                             className="w-4 h-4 bg-gray-700 border-gray-600 focus:ring-2 focus:ring-blue-500"
                         />
                         <img src="/asset/public.svg" alt="" className="" />
@@ -1022,9 +1029,9 @@ const NewSpaceForm = () => {
                             type="radio"
                             name="visibility"
                             value="private"
-                    onChange={(e) => { updateForm("visibility", e.target.value) }}
+                            onChange={(e) => { updateForm("visibility", e.target.value) }}
 
-                            checked={formState.visibility=="private"}
+                            checked={formState.visibility == "private"}
                             className="w-4 h-4 bg-gray-700 border-gray-600 focus:ring-2 focus:ring-blue-500"
                         />
                         <img src="/asset/Private.svg" alt="" className="" />

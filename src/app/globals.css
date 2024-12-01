@@ -32,7 +32,6 @@ select,input{
 
 
 .card-hover-effect{
-  padding: 10px;
   transition: 0.2s;
   border: 1px solid;
   border-image: linear-gradient(45deg, #9873d2, transparent, #5bb8daa7, #ffffff00, #ffffff00,#9873d2) 29;

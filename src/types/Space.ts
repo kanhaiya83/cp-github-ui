@@ -12,7 +12,7 @@ export interface Space {
   licence: string;
   sdk: 'streamlit' | 'gradio' | 'docker' | 'static';
   sdk_template: string,
-  hardware_type: number;
+  hardware_type: string;
   type: 'public' | 'private';
   live_url?: string;
   user: {
