@@ -39,7 +39,7 @@ const page = async ({
         pathname={pathname}
         owner={params.owner}
         repoName={params.repoName}
-        rootPath={"dataset"}
+        rootPath={"datasets"}
       >
         {file ? (
           <ReadmeViewer readme={file} />

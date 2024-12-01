@@ -37,7 +37,7 @@ export default async function Page({
       repoName={params.repoName}
       tagsData={tagsData}
       pathname={pathname}
-      rootPath={"model"}
+      rootPath={"models"}
     >
       <FilesAndFolderLayout
         initialBranch={initialBranch}
@@ -45,7 +45,7 @@ export default async function Page({
         data={data}
         owner={params.owner}
         repoName={params.repoName}
-        rootPath={"model"}
+        rootPath={"models"}
         commits={commits}
         contributors={contributors}
         totalCommits={totalCommits}

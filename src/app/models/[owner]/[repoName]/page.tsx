@@ -39,12 +39,12 @@ const page = async ({
         pathname={pathname}
         owner={params.owner}
         repoName={params.repoName}
-        rootPath={"model"}
+        rootPath={"models"}
       >
         {file ? (
           <ReadmeViewer readme={file} />
         ) : (
-          <div>No description found</div>
+          <div>No README.md found</div>
         )}
       </HuggingFaceDataset>
     </div>

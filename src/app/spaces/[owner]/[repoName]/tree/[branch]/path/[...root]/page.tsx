@@ -45,7 +45,7 @@ export default async function Page({
         data={data}
         owner={params.owner}
         repoName={params.repoName}
-        rootPath={"dataset"}
+        rootPath={"datasets"}
         commits={commits}
         contributors={contributors}
         totalCommits={totalCommits}

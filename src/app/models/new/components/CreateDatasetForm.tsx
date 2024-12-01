@@ -79,7 +79,7 @@ const CreateDatasetForm = ({ type }: { type: "dataset" | "model" }) => {
       const resp = await toast.promise(authenticatedRequest.post(`/${type}s`, formData), { pending: "Creating.." })
       // router.push(`/datasets/${formData.owner}/${formData.name}`)
       toast.success("Created successfullly")
-      router.push(`/${type == "dataset" ? "dataset" : "models"}/${user?.username}/${formData.name}`)
+      router.push(`/${type}s/${user?.username}/${formData.name}`)
       return
     }
 
