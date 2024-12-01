@@ -18,13 +18,13 @@ const SpaceCard = ({
 }) => {
   return (
     <Link href={link}>
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col card-hover-effect">
               <div key={space.id} className="relative p-4 overflow-hidden flex-1">
                 {/* Top-left Half Border */}
-                <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div>
+                {/* <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div> */}
 
                 {/* Bottom-right Half Border */}
-                <div className="absolute bottom-0 right-0 h-1/2 w-1/2 border-b border-r border-[#62626A] pointer-events-none rounded-r"></div>
+                {/* <div className="absolute bottom-0 right-0 h-1/2 w-1/2 border-b border-r border-[#62626A] pointer-events-none rounded-r"></div> */}
 
                 {/* Card Content */}
                 <div className="relative ">

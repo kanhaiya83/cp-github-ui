@@ -25,3 +25,23 @@ body {
     text-wrap: balance;
   }
 }
+select,input{
+  background: transparent;
+}
+
+
+
+.card-hover-effect{
+  padding: 10px;
+  transition: 0.2s;
+  border: 1px solid;
+  border-image: linear-gradient(45deg, #9873d2, transparent, #5bb8daa7, #ffffff00, #ffffff00,#9873d2) 29;
+}
+.card-hover-effect:hover{
+  rotate: 1deg;
+  transform: scale(1.05);
+  cursor: pointer;
+  mix-blend-mode: initial;
+  box-shadow: 20px 20px 30px #5bb8da27, -20px -30px 20px #8039f11d;
+
+}

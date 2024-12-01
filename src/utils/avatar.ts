@@ -1,9 +1,9 @@
 import { createAvatar } from '@dicebear/core';
-import { botttsNeutral ,icons} from '@dicebear/collection';
+import { botttsNeutral ,icons , rings} from '@dicebear/collection';
 
 export const generateAvatar = (seed: string | number,style?:"icons") => {
 const styles = {
-    "icons":icons,
+    "icons":rings,
     botttsNeutral
 }
     const avatar = createAvatar( (style && styles[style])|| botttsNeutral, {
