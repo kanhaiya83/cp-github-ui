@@ -16,6 +16,7 @@ const ProfileSettingsWrapper = ({
     },
     { label: "Account Settings", link: "/setting" },
     { label: "Create New Access Token", link: "/setting/create-access-token" },
+    { label: "Create Deployment", link: "/deployment/new" },
     { label: "Create Dataset", link: "/datasets/new" },
     { label: "Create Spaces", link: "/spaces/new" },
     { label: "Create Model", link: "/models/new" },

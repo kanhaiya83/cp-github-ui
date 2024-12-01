@@ -81,6 +81,10 @@ const Header = () => {
         <Link className="font-semibold" href={"/spaces"}>Agents</Link>
             <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </li>
+          <li className="relative group cursor-pointer">
+        <Link className="font-semibold" href={"/deployment"}>Deployments</Link>
+            <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
+          </li>
           {/* <li className="relative group cursor-pointer">
         <Link className="font-semibold" href={"#"}>Pricing</Link>
             <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
