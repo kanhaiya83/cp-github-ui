@@ -7,10 +7,10 @@ const Page = () => {
         <div className="max-w-xl w-full py-10">
             <div className="mb-6 text-center">
 
-            <h1 className="text-2xl mb-2 font-semibold">Create a new dataset repository</h1>
-        <p className='text-gray-300 text-sm'>A repository contains all dataset files, including the revision history.</p>
+            <h1 className="text-2xl mb-2 font-semibold">Create a new model repository</h1>
+        <p className='text-gray-300 text-sm'>A repository contains all model files,weights, including the revision history.</p>
             </div>
-            <CreateDatasetForm/>
+            <CreateDatasetForm type='model'/>
         </div>
     </div>
   )

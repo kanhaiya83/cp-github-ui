@@ -7,34 +7,34 @@ import React, { useEffect, useState } from 'react';
 import { LuBook, LuBookLock } from 'react-icons/lu';
 import { toast } from 'react-toastify';
 import { formatsData, modalitiesData } from './contant';
-function validateGitHubRepoName(name:string) {
+function validateGitHubRepoName(name: string) {
   // Check if the name is between 1 and 100 characters
   if (name.length === 0 || name.length > 100) {
-      return false;
+    return false;
   }
 
   // Check if it starts or ends with a dash or underscore
   if (/^[-_]|[-_]$/.test(name)) {
-      return false;
+    return false;
   }
 
   // Check if it contains only valid characters: alphanumeric, dash, and underscore
   if (!/^[a-zA-Z0-9-_]+$/.test(name)) {
-      return false;
+    return false;
   }
 
   return true;
 }
-interface FormData{
+interface FormData {
   name: string,
   owner: string,
   license: string,
   visibility: string,
   format: string[],
   modalities: string[],
-  description:string
+  description: string
 }
-const LicenseForm: React.FC = () => {
+const CreateDatasetForm = ({ type }: { type: "dataset" | "model" }) => {
   const { user } = useCurrentUser()
   const router = useRouter()
   const [isValidName, setIsValidName] = useState<boolean | null>(true)
@@ -45,7 +45,7 @@ const LicenseForm: React.FC = () => {
     visibility: 'private',
     format: [],
     modalities: [],
-    description:"Placeholder"
+    description: "Placeholder"
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -54,18 +54,18 @@ const LicenseForm: React.FC = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleModalityChange = (key:string) => {
-    setFormData(prev=>{
+  const handleModalityChange = (key: string) => {
+    setFormData(prev => {
       let temp = [...prev.modalities]
-      if(temp.includes(key)){
-        temp = temp.filter(k=>k!=key)
+      if (temp.includes(key)) {
+        temp = temp.filter(k => k != key)
       }
-      else{
+      else {
         temp.push(key)
       }
       return {
         ...prev,
-        modalities : temp
+        modalities: temp
       }
     });
   };
@@ -76,10 +76,10 @@ const LicenseForm: React.FC = () => {
       router.push("/login")
     }
     try {
-      const resp = await toast.promise(authenticatedRequest.post("/datasets", formData), { pending: "Creating.." })
+      const resp = await toast.promise(authenticatedRequest.post(`/${type}s`, formData), { pending: "Creating.." })
       // router.push(`/datasets/${formData.owner}/${formData.name}`)
       toast.success("Created successfullly")
-      router.push(`/dataset/${user?.username}/${formData.name}`)
+      router.push(`/${type == "dataset" ? "dataset" : "models"}/${user?.username}/${formData.name}`)
       return
     }
 
@@ -93,7 +93,7 @@ const LicenseForm: React.FC = () => {
     }
 
   };
-  
+
   useEffect(() => {
     setIsValidName(validateGitHubRepoName(formData.name))
   }, [formData.name])
@@ -145,24 +145,29 @@ const LicenseForm: React.FC = () => {
           <option value="ISC">ISC</option>
         </select>
       </div>
-      {/* Format */}
-      <div className="">
-        <label htmlFor="" className='mb-1 block'>Format</label>
-        <div className='flex flex-wrap gap-x-3 gap-y-2'>
-          {formatsData.map(format => {
-            return <button key={format.name} type="button" onClick={() => { setFormData((prev: any) => ({ ...prev, format: [format.name] })) }} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm leading-none whitespace-nowrap rounded-md border border-solid  ${formData.format[0] == format.name ? "bg-blue-500 bg-opacity-20 border-blue-600 text-white" : "bg-transparent border-zinc-700 text-neutral-400"}`}><img src={format.icon} alt="" className='w-4' />{format.name}</button>
-          })}
-        </div>
-      </div>
-      {/* Modalities */}
-      <div className="">
-        <label htmlFor="" className='mb-1 block'>Modalities</label>
-        <div className='flex flex-wrap gap-x-3 gap-y-2'>
-          {modalitiesData.map(modality => {
-            return <button key={modality.label} type="button" onClick={() => { handleModalityChange(modality.label) }} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm leading-none whitespace-nowrap rounded-md border border-solid  ${formData.modalities.includes(modality.label) ? "bg-blue-500 bg-opacity-20 border-blue-600 text-white" : "bg-transparent border-zinc-700 text-neutral-400"}`}><img src={modality.icon} alt="" className='w-4' />{modality.label}</button>
-          })}
-        </div>
-      </div>
+      {
+        type == "dataset" &&
+        <>
+          {/* Format */}
+          <div className="">
+            <label htmlFor="" className='mb-1 block'>Format</label>
+            <div className='flex flex-wrap gap-x-3 gap-y-2'>
+              {formatsData.map(format => {
+                return <button key={format.name} type="button" onClick={() => { setFormData((prev: any) => ({ ...prev, format: [format.name] })) }} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm leading-none whitespace-nowrap rounded-md border border-solid  ${formData.format[0] == format.name ? "bg-blue-500 bg-opacity-20 border-blue-600 text-white" : "bg-transparent border-zinc-700 text-neutral-400"}`}><img src={format.icon} alt="" className='w-4' />{format.name}</button>
+              })}
+            </div>
+          </div>
+          {/* Modalities */}
+          <div className="">
+            <label htmlFor="" className='mb-1 block'>Modalities</label>
+            <div className='flex flex-wrap gap-x-3 gap-y-2'>
+              {modalitiesData.map(modality => {
+                return <button key={modality.label} type="button" onClick={() => { handleModalityChange(modality.label) }} className={`flex items-center gap-1.5 px-3 py-1.5 text-sm leading-none whitespace-nowrap rounded-md border border-solid  ${formData.modalities.includes(modality.label) ? "bg-blue-500 bg-opacity-20 border-blue-600 text-white" : "bg-transparent border-zinc-700 text-neutral-400"}`}><img src={modality.icon} alt="" className='w-4' />{modality.label}</button>
+              })}
+            </div>
+          </div>
+        </>
+      }
       {/* Visibility Radio Buttons */}
       <div className="w-full py-5 border-y border-gray-700">
         <div className="space-y-4">
@@ -221,4 +226,4 @@ const LicenseForm: React.FC = () => {
   );
 };
 
-export default LicenseForm;
+export default CreateDatasetForm;

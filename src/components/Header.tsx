@@ -67,7 +67,7 @@ const Header = () => {
 <div className="flex gap-8">
         <ul className="flex items-center space-x-8 text-sm">
           <li className="relative group cursor-pointer">
-        <Link className="font-semibold" href={"/dataset"}>Datasets</Link>
+        <Link className="font-semibold" href={"/datasets"}>Datasets</Link>
             <span className="absolute left-0 bottom-0 h-0.5 w-0 -mb-1 bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
           </li>
           <li className="relative group cursor-pointer">
