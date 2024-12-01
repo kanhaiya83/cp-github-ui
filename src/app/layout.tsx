@@ -27,9 +27,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" data-bs-theme-mode="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`bg-[#0a0a0a] text-white ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReactQueryProvider>
           <Header/>
