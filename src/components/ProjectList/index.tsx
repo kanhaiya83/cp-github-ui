@@ -7,15 +7,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 const ProjectList = ({ rootPath }: { rootPath: string }) => {
-  const [datasetsList, setDataSetList] = useState<Project[]>([]);
+  const [projectList, setProjectList] = useState<Project[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/projects`
+          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/groups/${rootPath}s`
         );
-        setDataSetList(res.data);
+        setProjectList(res.data.projects);
       } catch (error) {
         console.log(error);
       }
@@ -25,11 +26,11 @@ const ProjectList = ({ rootPath }: { rootPath: string }) => {
   return (
     <div>
       <div className="py-10 px-10">
-        <FilterProject />
-        <SearchProject projects={datasetsList} />
+        {rootPath == "dataset" && <FilterProject />}
+        <SearchProject setSearchQuery={setSearchQuery} projects={projectList}/>
         <div className="mb-4 p-4">
-          <div className="grid grid-cols-4 gap-4">
-            {datasetsList.map((item, index) => (
+          <div className="grid grid-cols-4 gap-x-[3%] gap-y-10">
+            {projectList.filter(d=>d.name_with_namespace.includes(searchQuery)).map((item, index) => (
               <ProjectCard
                 key={index}
                 project={item}

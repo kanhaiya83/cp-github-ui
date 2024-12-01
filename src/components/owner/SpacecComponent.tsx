@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 import SpaceCard from "./SpaceCard";
 import SortButton from "./SortButton";
 import { Space } from "@/types/Space";
+import { useQueries, useQuery } from "@tanstack/react-query";
+import { authenticatedRequest } from "@/config/request";
+import Spinner from "../Spinner";
 
 
 const SpacesComponent = (
@@ -16,8 +19,6 @@ const SpacesComponent = (
     data: Space[]
   }
 ) => {
-  const [datasetsList, setDataSetList] = useState<Project[]>([]);
-  // const spaces: Space[] =
 
   const [spaces, setSpaces] = useState<any[]>([
     {
@@ -75,21 +76,13 @@ const SpacesComponent = (
       last_updated:new Date(),
     },
   ]);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/projects`
-        );
-        setDataSetList(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  const userSpacesQuery = useQuery({queryKey:["mySpaces"],queryFn:async()=>{
+    const spacesResp = await authenticatedRequest.get("/spaces")
+    const data:Space[]= spacesResp.data
+    return data
+  }})
   return (
-    <section className="flex flex-col mb-10 px-20">
+    <section className="flex flex-col mb-10 px-[5%] py-10">
         {/* Search Bar */}
         {/* <div className="flex items-center justify-between my-4">
           <input
@@ -115,10 +108,29 @@ const SpacesComponent = (
             </button>
           </div>
         </div> */}
-      <main className="flex flex-col mt-4 w-full max-md:max-w-full">
-        <div className="flex flex-col w-full max-md:max-w-full">
+        <div className="w-full max-md:max-w-full">
+          <h2 className="mb-3 font-semibold">My Agents</h2>
+            {
+              userSpacesQuery.isLoading ? <div className="flex justify-center items-center text-center py-8">
+                <Spinner/>
+              </div>:<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[2%] gap-y-8 w-full">
+              {userSpacesQuery.data ? userSpacesQuery.data.filter(space=>space.visibility=="private").map((spaceData, index) => (
+                <SpaceCard
+                
+                  key={spaceData.id}
+                  link={`/spaces/${spaceData.path_with_namespace}`}
+                  space={spaceData}
+                  index={index}
+                />
+              )) : <><span>No agents found</span></> }
+            </div>
+            }
+          </div>
+          <div className="flex h-[1px] bg-gray-800 my-6"></div>
           <div className="w-full max-md:max-w-full">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full">
+          <h2 className="mb-3 font-semibold">Public Agents</h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[2%] gap-y-8 w-full">
               {data.map((spaceData, index) => (
                 <SpaceCard
                   key={spaceData.id}
@@ -129,8 +141,6 @@ const SpacesComponent = (
               ))}
             </div>
           </div>
-        </div>
-      </main>
       {/* <ExpandButton /> */}
     </section>
   );

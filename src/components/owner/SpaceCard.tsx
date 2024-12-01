@@ -4,28 +4,22 @@ import Link from "next/link";
 import { FiHeart } from "react-icons/fi";
 import { Space } from "@/types/Space";
 import { formatDistanceToNow } from "date-fns";
+import { generateAvatar } from "@/utils/avatar";
+import Image from "next/image";
 
 const SpaceCard = ({
   space,
   index,
-  link,
+  link
 }: {
   space: Space;
   index: number;
   link: string;
 }) => {
-  const isEven = index % 2 === 0;
-  const icons = [
-    "🧬",
-    "💨",
-    "✍",
-    "🦀",
-    "🐠"
-  ]
   return (
     <Link href={link}>
-      <div>
-              <div key={space.id} className="relative p-4 overflow-hidden">
+      <div className="h-full flex flex-col">
+              <div key={space.id} className="relative p-4 overflow-hidden flex-1">
                 {/* Top-left Half Border */}
                 <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div>
 
@@ -44,16 +38,16 @@ const SpaceCard = ({
                     </div>
                     
                   </div>
-                  <div className="text-6xl my-4 text-center">{icons[index]}</div>
-                  <h3 className="font-bold text-lg text-center">{space.name}</h3>
+                  <Image className=" rounded-lg w-[27%] mx-auto my-4 text-center" width={100} height={100} src={generateAvatar(space._id)} alt=""/>
+                  <h3 className=" text-center"><span className="text-sm font-thin text-gray-400">{space.user.username}</span> / <span className="font-bold text-lg">{space.name}</span> </h3>
                 </div>
               </div>
 
-              <div className="flex justify-between items-center text-sm">
-                <div className="flex gap-2">
+              <div className="flex justify-end items-center text-sm">
+                {/* <div className="flex gap-2">
                   <img src="/asset/Ellipse.svg" alt="" />
                   <h3>{space.user.username}</h3>
-                </div>
+                </div> */}
                  <p className="text-gray-400 mt-2 text-sm">created {formatDistanceToNow(space.created_at)} ago</p>
               </div>
             </div>

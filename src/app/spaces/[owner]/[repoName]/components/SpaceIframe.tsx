@@ -27,7 +27,7 @@ export default function SpaceIframe({ url, emptyRepo }: { url: string; emptyRepo
   if (emptyRepo) {
     return (
       <div style={{ textAlign: 'center', padding: '20px' }}>
-        Push code to the repo to build the space.
+        Push some code to the repo to build the agent.
       </div>
     );
   }

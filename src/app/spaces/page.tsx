@@ -5,13 +5,9 @@ import Header from "@/components/Header";
 import { publicRequest } from "@/config/request";
 
 const page = async () => {
-  const publicSpacesReq = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/spaces/public")
+  const publicSpacesReq = await fetch(process.env.NEXT_PUBLIC_SERVER_URL + "/spaces/public",{cache:"no-store"})
   const publicSpacesResponse = await publicSpacesReq.json()
   const publicSpaces = publicSpacesResponse.data
-  return <div>
-    <Header />
-    <SpaceComponent data={publicSpaces}/>
-
-  </div>;
+  return <SpaceComponent data={publicSpaces}/>
 };
 export default page;

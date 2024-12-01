@@ -3,14 +3,15 @@
 import { Project } from "@/types/project";
 import React from "react";
 
-const SearchProject = ({ projects }: { projects: Project[] }) => {
+const SearchProject = ({ projects , setSearchQuery }: { projects: Project[] , setSearchQuery:any }) => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">
         <div className="flex justify-start items-center gap-2">
-          <div>DataSet found {projects.length}</div>
+          <div>Found {projects.length} items</div>
           <div className="flex justify-center items-center gap-2 p-4">
             <input
+            onChange={(e)=>setSearchQuery(e.target.value)}
               type="text"
               placeholder="Search"
               className="bg-gray-50 border px-4 py-2 border-gray-300 text-white text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
@@ -21,7 +22,7 @@ const SearchProject = ({ projects }: { projects: Project[] }) => {
           </div>
         </div>
         <div className="flex justify-center items-center gap-2 p-4">
-          <select
+          {/* <select
             id="text"
             className="bg-gray-50 border px-4 py-2 border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
           >
@@ -30,7 +31,7 @@ const SearchProject = ({ projects }: { projects: Project[] }) => {
             </option>
             <option value="title">Title</option>
             <option value="tags">Tags</option>
-          </select>
+          </select> */}
           <select
             id="sortBy"
             className="w-full bg-gray-50 border px-4 py-2 border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "

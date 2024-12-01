@@ -1,5 +1,6 @@
 
 export interface Space {
+  _id: string;
   id: number;
   // icon: string;
   name: string;
