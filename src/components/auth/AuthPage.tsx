@@ -201,13 +201,13 @@ function AuthPageContent({ type }: AuthPageContentProps) {
                 onClick={handleGoogleLogin}
               >
                 <img
-                  src="https://th.bing.com/th/id/R.7e557f1c0864829c54c300d15bee69f4?rik=fjZN1AYH30vXIw&riu=http%3a%2f%2fpngimg.com%2fuploads%2fgoogle%2fgoogle_PNG19635.png&ehk=ZmsumEtoeJQhKoUzQTZO2TEbYPBu0%2b7EFdjmJ3qljls%3d&risl=&pid=ImgRaw&r=0"
+                  src="/icons/google.png"
                   alt="Google"
                   className="w-6 h-6"
                 />
                 Google
               </button>
-              <button className="text-neutral-300 text-sm flex gap-1 items-center border border-neutral-500 px-2 py-1 rounded-md">
+              {/* <button className="text-neutral-300 text-sm flex gap-1 items-center border border-neutral-500 px-2 py-1 rounded-md">
                 <img src="/asset/Vector.svg" alt="Facebook" />
                 Facebook
               </button>
@@ -222,7 +222,7 @@ function AuthPageContent({ type }: AuthPageContentProps) {
                   className="w-6 h-6"
                 />
                 FAM Protocol
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="mt-6 text-center text-sm text-neutral-400">
