@@ -32,9 +32,9 @@ const OwnerPage = async ({
 
   return (
     <div className=" py-10">
-      <Header />
+      {/* <Header /> */}
       {!user ? <p>No user found</p> : <ProfileHeader user={user} />}
-      <SpacesComponent />
+      {/* <SpacesComponent /> */}
       {projects.length > 0 ? (
         <ModelList models={projects} rootPath={rootPath} />
       ) : (
