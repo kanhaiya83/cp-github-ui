@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { firebaseAuth } from "@/config/firebase";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import ProfilePopup from "./setting/ProfilePopup";
 import { useCurrentUser } from "@/hooks/user";
@@ -12,10 +12,9 @@ const Header = () => {
   const router = useRouter();
   const [isProfilePopupOpen, setIsProfilePopupOpen] = React.useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const queryClient = useQueryClient();
 
-  const { user } = useCurrentUser();
-
+  const { user ,loading , firebaseUser} = useCurrentUser();
+  const pathname =usePathname()
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       setIsUserLoggedIn(!!user);
@@ -48,7 +47,11 @@ const Header = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  useEffect(()=>{
+    if(!firebaseUser && !loading && !["login","signup"].includes(pathname)){
+      router.push("/login")
+    }
+  },[])
   return (
     <header className="bg-black sticky top-0 z-30 text-white flex justify-between items-center py-6 px-14 border-b border-[#201e27]">
       {/* Logo Section */}

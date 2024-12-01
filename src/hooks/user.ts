@@ -36,7 +36,7 @@ const updateUser = async (payload: Partial<User>): Promise<User> => {
 };
 
 export const useCurrentUser = () => {
-  const [user] = useAuthState(firebaseAuth);
+  const [user,loading] = useAuthState(firebaseAuth);
 
   const query = useQuery<User, Error>({
     queryKey: ["currentUser"],
@@ -44,7 +44,7 @@ export const useCurrentUser = () => {
     enabled: user ? true : false,
   });
 
-  return { ...query, user: query.data };
+  return { ...query, user: query.data , loading , firebaseUser:user};
 };
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
