@@ -11,10 +11,11 @@ const SearchProject = ({ projects , setSearchQuery }: { projects: Project[] , se
           <div>Found {projects.length} items</div>
           <div className="flex justify-center items-center gap-2 p-4">
             <input
+
             onChange={(e)=>setSearchQuery(e.target.value)}
               type="text"
               placeholder="Search"
-              className="bg-gray-50 border px-4 py-2 border-gray-300 text-white text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
+              className="bg-transparent border px-4 py-2 border-gray-300 text-white text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
             />
             <button className="text-white border-2 rounded-lg hover:bg-gray-700 text-sm border-gray-700 px-4 py-2 ">
               Search
@@ -34,7 +35,7 @@ const SearchProject = ({ projects , setSearchQuery }: { projects: Project[] , se
           </select> */}
           <select
             id="sortBy"
-            className="w-full bg-gray-50 border px-4 py-2 border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
+            className="w-full bg-transparent border px-4 py-2 border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  dark:bg-zinc-950 dark:border-gray-700 "
           >
             <option className="px-2 py-1" selected value="trending">
               Sort By trending

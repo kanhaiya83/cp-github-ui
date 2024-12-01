@@ -26,7 +26,7 @@ const ProjectList = ({ rootPath }: { rootPath: string }) => {
   return (
     <div>
       <div className="py-10 px-10">
-        {rootPath == "dataset" && <FilterProject />}
+        {rootPath == "datasets" && <FilterProject />}
         <SearchProject setSearchQuery={setSearchQuery} projects={projectList}/>
         <div className="mb-4 p-4">
           <div className="grid grid-cols-4 gap-x-[3%] gap-y-10">
