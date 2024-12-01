@@ -14,9 +14,9 @@ const ProjectList = ({ rootPath }: { rootPath: string }) => {
     (async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/groups/${rootPath}s`
+          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/groups/${rootPath}s/projects/shared`
         );
-        setProjectList(res.data.projects);
+        setProjectList(res.data);
       } catch (error) {
         console.log(error);
       }

@@ -7,13 +7,13 @@ import { generateAvatar } from "@/utils/avatar";
 const ProjectCard = ({ project, link }: { project: Project; link: string }) => {
   return (
     <Link href={link}>
-      <article className="flex flex-col text-sm leading-none rounded-none max-w-[487px] relative">
+      <article className="flex flex-col text-sm leading-none rounded-none relative ">
         {/* Top-left Half Border */}
-        <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div>
+        {/* <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div> */}
 
         {/* Bottom-right Half Border */}
-        <div className="absolute bottom-0 right-0 h-1/2 w-1/2 border-b border-r border-[#62626A] pointer-events-none rounded-r"></div>
-        <div className="flex flex-wrap gap-5 py-4 px-5 w-full rounded-md  max-md:px-5 max-md:max-w-full hover:bg-slate-800 cursor-pointer ">
+        {/* <div className="absolute bottom-0 right-0 h-1/2 w-1/2 border-b border-r border-[#62626A] pointer-events-none rounded-r"></div> */}
+        <div className="flex flex-wrap  py-2 px-5 w-full rounded-md  max-md:px-5 max-md:max-w-full  cursor-pointer card-hover-effect">
           <div className="flex flex-auto gap-1">
             <div className="flex flex-col grow gap-2 shrink-0 basis-0 w-fit">
             <Image className=" rounded-full w-[27%] mx-auto my-4 text-center" width={100} height={100} src={generateAvatar(project.id,"icons")} alt=""/>
@@ -30,7 +30,7 @@ const ProjectCard = ({ project, link }: { project: Project; link: string }) => {
                 {/* <GoDotFill /> */}
                 <div className="flex ">
                   <span>
-                    Updated{formatDistanceToNow(project.last_activity_at)} ago
+                    Updated {formatDistanceToNow(project.last_activity_at)} ago
                   </span>
                 </div>
                 {/* <GoDotFill /> */}
