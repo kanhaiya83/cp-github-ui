@@ -5,7 +5,7 @@ import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
 import Header from "@/components/owner_repoName/Header";
 import SpaceIframe from "./components/SpaceIframe";
-import { publicRequest } from "@/config/request";
+import { fetchRequest, publicRequest } from "@/config/request";
 import { Space } from "@/types/Space";
 
 const page = async ({
@@ -13,22 +13,14 @@ const page = async ({
 }: {
   params: { owner: string; repoName: string; branch: string };
 }) => {
-  console.log(params, "params");
+  const data:Space =await fetchRequest(`/spaces/namespace/${encodeURIComponent(params.owner+"/"+params.repoName)}`) 
 
-  const { projectId, tagsData } = await getData({
+  const { projectId } = await getData({
     currentBranch: params.branch,
     root: [],
     owner: params.owner,
     repoName: params.repoName,
   });
-  const spaceRequestReponse = await publicRequest(`/spaces/namespace/${params.owner}/${params.repoName}`)
-  const spaceData:Space = spaceRequestReponse.data
-
-  // const projectId = await getProjectId({
-  //   owner: params.owner,
-  //   repoName: params.repoName,
-  // });
-  console.log(projectId, "projectId");
   if (projectId === -1) {
     return <div>Project not found</div>;
   }
@@ -49,7 +41,7 @@ const page = async ({
         repoName={params.repoName}
         rootPath={"spaces"}
       >
-        <SpaceIframe url={spaceData.deployed_url || `https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!spaceData.deployed_url && !file}/>
+        <SpaceIframe url={data.deployed_url || `https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!data.deployed_url && !file}/>
       </RepositoryViewContainer>
     </div>
   );
@@ -58,11 +50,11 @@ const page = async ({
 export async function generateStaticParams() {
 
   const spaceData = await publicRequest("/spaces/all")
-  const allSpaces:Space[] = spaceData.data.data
+  const allSpaces:Space[] = spaceData.data
 
   return allSpaces.map((space) => {
-    const owner = space.path_with_namespace.split("/")[0];
-    const repoName = space.path_with_namespace.split("/")[1];
+    const owner = space.repository.path_with_namespace.split("/")[0];
+    const repoName = space.repository.path_with_namespace.split("/")[1];
     return { owner, repoName };
   });
 }

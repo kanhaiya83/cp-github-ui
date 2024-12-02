@@ -23,7 +23,7 @@ const SpacesComponent = (
   const { user } = useCurrentUser()
   const userSpacesQuery = useQuery({
     queryKey: ["mySpaces"], queryFn: async () => {
-      const spacesResp = await authenticatedRequest.get("/spaces")
+      const spacesResp = await authenticatedRequest.get("/spaces/me")
       const data: Space[] = spacesResp.data
       return data
     }, enabled: !!user
@@ -67,8 +67,8 @@ const SpacesComponent = (
             {userSpacesQuery.data ? userSpacesQuery.data.filter(space => space.visibility == "private").map((spaceData, index) => (
               <SpaceCard
 
-                key={spaceData.id}
-                link={`/spaces/${spaceData.path_with_namespace}`}
+                key={spaceData._id}
+                link={`/spaces/${spaceData.repository.path_with_namespace}`}
                 space={spaceData}
                 index={index}
               />
@@ -86,8 +86,8 @@ const SpacesComponent = (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[2%] gap-y-8 w-full">
           {data.map((spaceData, index) => (
             <SpaceCard
-              key={spaceData.id}
-              link={`/spaces/${spaceData.path_with_namespace}`}
+              key={spaceData._id}
+              link={`/spaces/${spaceData.repository.path_with_namespace}`}
               space={spaceData}
               index={index}
             />

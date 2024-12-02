@@ -19,7 +19,7 @@ const SpaceCard = ({
   return (
     <Link href={link}>
       <div className="h-full flex flex-col card-hover-effect px-4 py-2">
-              <div key={space.id} className="relative overflow-hidden flex-1">
+              <div className="relative overflow-hidden flex-1">
                 {/* Top-left Half Border */}
                 {/* <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div> */}
 
@@ -37,7 +37,7 @@ const SpaceCard = ({
                     </span>
                     <div className="flex gap-1 items-center">
                     {/* <FiHeart className="h-5 w-5" /> */}
-                    <span className="text-gray-400 text-sm"> {space.likes}</span>
+                    <span className="text-gray-400 text-sm"> {space.likes.count}</span>
                     </div>
                     
                   </div>

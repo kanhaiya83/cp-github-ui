@@ -8,23 +8,23 @@ import { useRouter } from "next/navigation";
 const softwareLicences = [
     {
         display_name: "MIT Licence",
-        id: "mit_liscense"
+        id: "mit_license"
     },
     {
         display_name: "GNU General Public Licence v3.0",
-        id: "gnu_general_public_liscense_v3_0"
+        id: "gnu_general_public_license_v3_0"
     },
     {
         display_name: "Apache Licence 2.0",
-        id: "apache_liscense_2_0"
+        id: "apache_license_2_0"
     },
     {
         display_name: "BSD 3-Clause Licence",
-        id: "bsd_3_clause_liscense"
+        id: "bsd_3_clause_license"
     },
     {
         display_name: "BSD 2-Clause Licence",
-        id: "bsd_2_clause_liscense"
+        id: "bsd_2_clause_license"
     },
     {
         display_name: "Creative Commons Zero v1.0 Universal",
@@ -32,19 +32,19 @@ const softwareLicences = [
     },
     {
         display_name: "Eclipse Public Licence 2.0",
-        id: "eclipse_public_liscense_2_0"
+        id: "eclipse_public_license_2_0"
     },
     {
         display_name: "Mozilla Public Licence 2.0",
-        id: "mozilla_public_liscense_2_0"
+        id: "mozilla_public_license_2_0"
     },
     {
-        display_name: "The Unliscense",
-        id: "the_unliscense"
+        display_name: "The Unlicense",
+        id: "the_unlicense"
     },
     {
         display_name: "Academic Free Licence v3.0",
-        id: "academic_free_liscense_v3_0"
+        id: "academic_free_license_v3_0"
     }
 ];
 
@@ -53,7 +53,7 @@ type Visibility = "public" | "private";
 interface FormState {
     name: string;
     description: string;
-    liscense: string;
+    license: string;
     sdk: string;
     sdk_template: string;
     visibility: Visibility;
@@ -806,7 +806,7 @@ const NewSpaceForm = () => {
     const [formState, setFormState] = useState<FormState>({
         name: "",
         description: "",
-        liscense: softwareLicences[0].id,
+        license: softwareLicences[0].id,
         sdk: sdkArray[0].value,
         sdk_template: sdkArray[0].template[0].value,
         visibility: "public",
@@ -910,8 +910,8 @@ const NewSpaceForm = () => {
                     License
                 </label>
                 <select
-                    value={formState.liscense}
-                    onChange={(e) => { updateForm("liscense", e.target.value) }}
+                    value={formState.license}
+                    onChange={(e) => { updateForm("license", e.target.value) }}
                     id="license"
                     className="w-full p-2 ounded-md border rounded-md border-[#414141] focus:outline-none bg-[#000000]"
                 >

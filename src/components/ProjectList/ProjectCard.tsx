@@ -3,8 +3,10 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { generateAvatar } from "@/utils/avatar";
+import { Model } from "@/types/Model";
+import { Dataset } from "@/types/Dataset";
 
-const ProjectCard = ({ project, link }: { project: Project; link: string }) => {
+const ProjectCard = ({ project, link }: { project: Model | Dataset; link: string }) => {
   return (
     <Link href={link}>
       <article className="flex flex-col text-sm leading-none rounded-none relative ">
@@ -16,7 +18,7 @@ const ProjectCard = ({ project, link }: { project: Project; link: string }) => {
         <div className="flex flex-wrap  py-2 px-5 w-full rounded-md  max-md:px-5 max-md:max-w-full  cursor-pointer card-hover-effect">
           <div className="flex flex-auto gap-1">
             <div className="flex flex-col grow gap-2 shrink-0 basis-0 w-fit">
-            <Image className=" rounded-full w-[27%] mx-auto my-4 text-center" width={100} height={100} src={generateAvatar(project.id,link.includes("dataset") ? "rings" :"identicon")} alt=""/>
+            <Image className=" rounded-full w-[27%] mx-auto my-4 text-center" width={100} height={100} src={generateAvatar(project._id,link.includes("dataset") ? "rings" :"identicon")} alt=""/>
             <h3 className=" text-center">
             {/* <span className="text-sm font-thin text-gray-400">{project.user.username}</span> / */}
                <span className="font-bold text-lg">{project.name}</span> </h3>
@@ -30,7 +32,7 @@ const ProjectCard = ({ project, link }: { project: Project; link: string }) => {
                 {/* <GoDotFill /> */}
                 <div className="flex ">
                   <span>
-                    Updated {formatDistanceToNow(project.last_activity_at)} ago
+                    Updated {formatDistanceToNow(project.repository.last_activity_at)} ago
                   </span>
                 </div>
                 {/* <GoDotFill /> */}

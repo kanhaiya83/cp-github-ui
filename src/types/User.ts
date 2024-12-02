@@ -7,6 +7,7 @@ interface Socials {
 }
 
 export interface User {
+    _id:string
     name: string
     firebase_uid: string
     username: string

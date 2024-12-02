@@ -46,7 +46,7 @@ interface PushEventBody {
     };
   }
 
-export async function POST(request: Request) {
+  export async function POST(request: Request) {
     const requestBody:PushEventBody = await request.json()
     console.log({requestBody})
     revalidatePath(`/datasets/${requestBody.project.path_with_namespace}`, 'page')
@@ -58,4 +58,13 @@ export async function POST(request: Request) {
     return NextResponse.json({
         success:true
     })
+}
+
+export async function GET(request: Request) {
+  revalidatePath(`/datasets`, 'page')
+  revalidatePath(`/models`, 'page')
+  revalidatePath(`/spaces`, 'page')
+  return NextResponse.json({
+      success:true
+  })
 }

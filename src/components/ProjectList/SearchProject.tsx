@@ -1,9 +1,11 @@
 "use client";
 
+import { Dataset } from "@/types/Dataset";
+import { Model } from "@/types/Model";
 import { Project } from "@/types/project";
 import React from "react";
 
-const SearchProject = ({ projects , setSearchQuery }: { projects: Project[] , setSearchQuery:any }) => {
+const SearchProject = ({ projects , setSearchQuery }: { projects: (Model | Dataset)[] , setSearchQuery:any }) => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4">

@@ -1,16 +1,6 @@
-import { Project } from "./project"
-import { User } from "./User"
+import { ICommon } from "./ICommon"
 
-export interface Dataset{
-    gitlab_id: number
-    name: string
-    description: string
+export interface Dataset extends ICommon{
     modalities: string[]
     format: string[]
-    likes: number
-    user: User
-    created_at: Date
-    license: string
-    visibility: string
-    repositoy:Project
 }
