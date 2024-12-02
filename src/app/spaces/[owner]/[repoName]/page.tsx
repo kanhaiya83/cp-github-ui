@@ -5,6 +5,8 @@ import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
 import Header from "@/components/owner_repoName/Header";
 import SpaceIframe from "./components/SpaceIframe";
+import { publicRequest } from "@/config/request";
+import { Space } from "@/types/Space";
 
 const page = async ({
   params,
@@ -19,6 +21,9 @@ const page = async ({
     owner: params.owner,
     repoName: params.repoName,
   });
+  const spaceRequestReponse = await publicRequest(`/spaces/namespace/${params.owner}/${params.repoName}`)
+  const spaceData:Space = spaceRequestReponse.data
+
   // const projectId = await getProjectId({
   //   owner: params.owner,
   //   repoName: params.repoName,
@@ -44,21 +49,20 @@ const page = async ({
         repoName={params.repoName}
         rootPath={"spaces"}
       >
-        <SpaceIframe url={`https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!file}/>
+        <SpaceIframe url={spaceData.deployed_url || `https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!spaceData.deployed_url && !file}/>
       </HuggingFaceDataset>
     </div>
   );
 };
 
 export async function generateStaticParams() {
-  const project: Project[] = await axiosInstance
-    .get("/projects")
-    .then((res) => res.data);
 
-  return project.map((project) => {
-    const owner = project.path_with_namespace.split("/")[0];
-    const repoName = project.path_with_namespace.split("/")[1];
-    // console.log(owner, repoName);
+  const spaceData = await publicRequest("/spaces/all")
+  const allSpaces:Space[] = spaceData.data.data
+
+  return allSpaces.map((space) => {
+    const owner = space.path_with_namespace.split("/")[0];
+    const repoName = space.path_with_namespace.split("/")[1];
     return { owner, repoName };
   });
 }

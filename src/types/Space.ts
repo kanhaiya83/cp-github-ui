@@ -14,7 +14,7 @@ export interface Space {
   sdk_template: string,
   hardware_type: string;
   type: 'public' | 'private';
-  live_url?: string;
+  deployed_url?: string;
   user: {
     _id: string,
     name:string,
