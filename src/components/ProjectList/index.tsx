@@ -6,23 +6,8 @@ import { Project } from "@/types/project";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const ProjectList = ({ rootPath }: { rootPath: string }) => {
-  const [projectList, setProjectList] = useState<Project[]>([]);
+const ProjectList = ({ rootPath , projectList }: { rootPath: string , projectList:Project[] }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/groups/${rootPath}/projects/shared`
-        );
-        setProjectList(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-
   return (
     <div>
       <div className="py-10 px-10">
