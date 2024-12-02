@@ -1,4 +1,4 @@
-import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
+import RepositoryViewContainer from "@/components/owner_repoName/RepositoryViewContainer";
 import { axiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
@@ -42,7 +42,7 @@ const page = async ({
   return (
     <div>
       {/* <Header rootPath="spaces" pathname={pathname}/> */}
-      <HuggingFaceDataset
+      <RepositoryViewContainer
         // tagsData={tagsData}
         pathname={pathname}
         owner={params.owner}
@@ -50,7 +50,7 @@ const page = async ({
         rootPath={"spaces"}
       >
         <SpaceIframe url={spaceData.deployed_url || `https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!spaceData.deployed_url && !file}/>
-      </HuggingFaceDataset>
+      </RepositoryViewContainer>
     </div>
   );
 };

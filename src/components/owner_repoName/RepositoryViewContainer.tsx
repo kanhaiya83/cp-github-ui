@@ -5,7 +5,7 @@ import DatasetTags from "./DatasetTags";
 import DatasetNavigation from "./DatasetNavigation";
 import { ITagsData } from "@/types/type";
 
-const HuggingFaceDataset = ({
+const RepositoryViewContainer = ({
   tagsData,
   pathname,
   children,
@@ -36,4 +36,4 @@ const HuggingFaceDataset = ({
   );
 };
 
-export default HuggingFaceDataset;
+export default RepositoryViewContainer;

@@ -1,4 +1,4 @@
-import HuggingFaceDataset from "@/components/owner_repoName/HuggingFaceDataset";
+import RepositoryViewContainer from "@/components/owner_repoName/RepositoryViewContainer";
 import { axiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
@@ -34,7 +34,7 @@ const page = async ({
 
   return (
     <div>
-      <HuggingFaceDataset
+      <RepositoryViewContainer
         tagsData={tagsData}
         pathname={pathname}
         owner={params.owner}
@@ -46,7 +46,7 @@ const page = async ({
         ) : (
           <div>No description found</div>
         )}
-      </HuggingFaceDataset>
+      </RepositoryViewContainer>
     </div>
   );
 };
