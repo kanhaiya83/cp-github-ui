@@ -1,5 +1,5 @@
 import RepositoryViewContainer from "@/components/owner_repoName/RepositoryViewContainer";
-import { axiosInstance } from "@/utils/axios";
+import { gitlabAxiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
@@ -17,11 +17,6 @@ const page = async ({
     owner: params.owner,
     repoName: params.repoName,
   });
-  // const projectId = await getProjectId({
-  //   owner: params.owner,
-  //   repoName: params.repoName,
-  // });
-  console.log(projectId, "projectId");
   if (projectId === -1) {
     return <div>Project not found</div>;
   }
@@ -52,7 +47,7 @@ const page = async ({
 };
 
 export async function generateStaticParams() {
-  const projectsResp = await axiosInstance
+  const projectsResp = await gitlabAxiosInstance
     .get("/projects")
     console.log({projectsResp})
     const projectsData :Project[]= projectsResp.data

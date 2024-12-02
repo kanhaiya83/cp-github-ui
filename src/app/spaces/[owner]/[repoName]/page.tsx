@@ -1,5 +1,5 @@
 import RepositoryViewContainer from "@/components/owner_repoName/RepositoryViewContainer";
-import { axiosInstance } from "@/utils/axios";
+import { gitlabAxiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";

@@ -1,5 +1,5 @@
 import RepositoryViewContainer from "@/components/owner_repoName/RepositoryViewContainer";
-import { axiosInstance } from "@/utils/axios";
+import { gitlabAxiosInstance } from "@/utils/axios";
 import { getData } from "@/utils/getData";
 import FilesAndFolderLayout from "@/components/FilesAndFolderLayout";
 import { Project } from "@/types/project";
@@ -57,13 +57,13 @@ export default async function Page({
 }
 
 export async function generateStaticParams() {
-  const project: Project[] = await axiosInstance
+  const project: Project[] = await gitlabAxiosInstance
     .get("/projects")
     .then((res) => res.data);
 
   const data = await Promise.all(
     project.map(async (project) => {
-      let branches: Branch[] | [{ name: string }] = await axiosInstance
+      let branches: Branch[] | [{ name: string }] = await gitlabAxiosInstance
         .get(`/projects/${project.id}/repository/branches`)
         .then((res) => res.data);
       branches = branches.length ? branches : [{ name: "main" }];
