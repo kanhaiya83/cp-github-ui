@@ -4,10 +4,9 @@ import axios from "axios";
 
 const Page = async () => {
  
-    const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_GIT_REPO_URL}/groups/datasets/projects/shared`
-    );
-  return <ProjectList rootPath="datasets" projectList={res.data}/>;
+    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL+"/datasets/public")
+    const data = await res.json()
+  return <ProjectList rootPath="datasets" projectList={data}/>;
 };
 
 export default Page;

@@ -5,7 +5,8 @@ interface Socials {
     twitter_username?: string
     linkedin_profile?: string
 }
-export interface IUser extends Document {
+
+export interface User {
     name: string
     firebase_uid: string
     username: string
@@ -13,4 +14,5 @@ export interface IUser extends Document {
     socials: Socials
     display_photo?: string
     gitlab_id?: number
+    gitlab_impersonation_token?:string
 }
