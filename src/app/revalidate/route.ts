@@ -64,6 +64,7 @@ export async function GET(request: Request) {
   revalidatePath(`/datasets`, 'page')
   revalidatePath(`/models`, 'page')
   revalidatePath(`/spaces`, 'page')
+  revalidatePath(`/[username]`, 'page')
   return NextResponse.json({
       success:true
   })

@@ -123,7 +123,7 @@ const TokenRow: React.FC<TokenRowProps> = ({ token }) => {
       </td>
       <td className="px-5 py-3.5">
         <span className="px-5 py-1.5 whitespace-nowrap rounded-md border border-solid bg-zinc-800 border-zinc-800 text-neutral-400">
-          {"Inference"}
+          {"Repo/Inference"}
         </span>
       </td>
       <td className="px-5 py-3.5">

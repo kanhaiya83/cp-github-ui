@@ -5,6 +5,7 @@ import InputField from "./InputField";
 import SectionHeader from "./SectionHeader";
 import { useGenerateAccessToken } from "@/hooks/keys";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const CreateAccessToken = () => {
   const { generateAccessTokenMutation, isPending } = useGenerateAccessToken();
@@ -75,11 +76,11 @@ const CreateAccessToken = () => {
     },
   ];
   const [name, setName] = useState("");
-  const handleCreateAccessToken = () => {
+  const handleCreateAccessToken = async () => {
     const permissions = inferencePermissions.map(
       (permission) => permission.name
     );
-    generateAccessTokenMutation({ permissions, name });
+    await toast.promise(generateAccessTokenMutation({ permissions, name }),{pending:"Creating.."});
     router.push("/setting/access-tokens");
   };
 

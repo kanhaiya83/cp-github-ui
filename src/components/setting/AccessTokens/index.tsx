@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import TokenTable from "./TokenTable";
 import CreateTokenButton from "./CreateTokenButton";
 import { useGetApiKeys } from "@/hooks/keys";
@@ -7,46 +7,11 @@ import { useGetApiKeys } from "@/hooks/keys";
 interface AccessTokensProps {}
 
 const AccessTokens: React.FC<AccessTokensProps> = () => {
-  const tokenData = [
-    {
-      name: "Emma Jackson",
-      value: "Lorem ipsum dolor",
-      lastRefreshed: "25 July 2024",
-      lastUsed: "23 Days Ago",
-      permissions: "Write",
-    },
-    {
-      name: "Emma Jackson",
-      value: "Lorem ipsum dolor",
-      lastRefreshed: "25 July 2024",
-      lastUsed: "23 Days Ago",
-      permissions: "Write",
-    },
-    {
-      name: "Emma Jackson",
-      value: "Lorem ipsum dolor",
-      lastRefreshed: "25 July 2024",
-      lastUsed: "23 Days Ago",
-      permissions: "Write",
-    },
-    {
-      name: "Emma Jackson",
-      value: "Lorem ipsum dolor",
-      lastRefreshed: "25 July 2024",
-      lastUsed: "23 Days Ago",
-      permissions: "Write",
-    },
-    {
-      name: "Emma Jackson",
-      value: "Lorem ipsum dolor",
-      lastRefreshed: "25 July 2024",
-      lastUsed: "23 Days Ago",
-      permissions: "Write",
-    },
-  ];
-
-  const { apiKeys, isLoading } = useGetApiKeys();
-
+  
+  const { apiKeys, isLoading ,refetch} = useGetApiKeys();
+  useEffect(()=>{
+    refetch()
+  },[])
   return (
     <main className="flex flex-col rounded-none">
       <section className="flex flex-col pt-7 pb-56 w-full rounded-2xl border border-solid border-zinc-900 max-md:pb-24 max-md:max-w-full">

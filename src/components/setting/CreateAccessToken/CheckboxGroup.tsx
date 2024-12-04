@@ -28,7 +28,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             type="checkbox"
             id={item.name}
             name={item.name}
-            // checked={title === "Inference"}
+            checked={true}
             // readOnly
             // disabled
             className={`appearance-none text-sm shrink-0 rounded-sm border-2 mt-1 border-solid h-[15px] w-[15px] ${
