@@ -1,10 +1,9 @@
 import React from "react";
 import ProjectList from "@/components/ProjectList";
+import { fetchRequest } from "@/config/request";
 
 const Page = async () => {
- 
-    const res = await fetch(process.env.NEXT_PUBLIC_SERVER_URL+"/datasets/public")
-    const data = await res.json()
+ const data= await fetchRequest("/datasets/public")
   return <ProjectList rootPath="datasets" projectList={data}/>;
 };
 

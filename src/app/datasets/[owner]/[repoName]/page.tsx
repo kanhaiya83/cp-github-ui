@@ -3,6 +3,8 @@ import { gitlabAxiosInstance } from "@/utils/axios";
 import { fetchFile, getData } from "@/utils/getData";
 import ReadmeViewer from "@/components/ReadmeViewer";
 import { Project } from "@/types/project";
+import { publicRequest } from "@/config/request";
+import { Dataset } from "@/types/Dataset";
 
 const page = async ({
   params,
@@ -47,14 +49,12 @@ const page = async ({
 };
 
 export async function generateStaticParams() {
-  const projectsResp = await gitlabAxiosInstance
-    .get("/projects")
-    console.log({projectsResp})
-    const projectsData :Project[]= projectsResp.data
-  return projectsData.map((project) => {
-    const owner = project.path_with_namespace.split("/")[0];
-    const repoName = project.path_with_namespace.split("/")[1];
-    // console.log(owner, repoName);
+  const data = await publicRequest("/spaces/all")
+  const allSpaces:Dataset[] = data.data
+
+  return allSpaces.map((space) => {
+    const owner = space.repository.path_with_namespace.split("/")[0];
+    const repoName = space.repository.path_with_namespace.split("/")[1];
     return { owner, repoName };
   });
 }

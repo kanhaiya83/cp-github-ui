@@ -7,13 +7,14 @@ import Header from "@/components/owner_repoName/Header";
 import SpaceIframe from "./components/SpaceIframe";
 import { fetchRequest, publicRequest } from "@/config/request";
 import { Space } from "@/types/Space";
+import SpaceViewContent from "./components/SpaceViewContent";
 
 const page = async ({
   params,
 }: {
   params: { owner: string; repoName: string; branch: string };
 }) => {
-  const data:Space =await fetchRequest(`/spaces/namespace/${encodeURIComponent(params.owner+"/"+params.repoName)}`) 
+  const data: Space = await fetchRequest(`/spaces/namespace/${encodeURIComponent(params.owner + "/" + params.repoName)}`)
 
   const { projectId } = await getData({
     currentBranch: params.branch,
@@ -41,7 +42,7 @@ const page = async ({
         repoName={params.repoName}
         rootPath={"spaces"}
       >
-        <SpaceIframe url={data.deployed_url || `https://${params.owner}-${params.repoName}.spaces-dev.clusterprotocol.io`} emptyRepo={!data.deployed_url && !file}/>
+        <SpaceViewContent data={data} emptyRepo={!data.deployed_url && !file}/>
       </RepositoryViewContainer>
     </div>
   );
@@ -50,7 +51,7 @@ const page = async ({
 export async function generateStaticParams() {
 
   const spaceData = await publicRequest("/spaces/all")
-  const allSpaces:Space[] = spaceData.data
+  const allSpaces: Space[] = spaceData.data
 
   return allSpaces.map((space) => {
     const owner = space.repository.path_with_namespace.split("/")[0];

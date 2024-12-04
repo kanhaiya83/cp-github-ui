@@ -47,7 +47,7 @@ export default function SpaceIframe({ url, emptyRepo }: { url: string; emptyRepo
   }
 
   return (
-    <div style={{ width: '100%' }} className='bg-black'>
+    <div style={{ width: '100%' }}>
       <iframe
         src={url}
         style={{

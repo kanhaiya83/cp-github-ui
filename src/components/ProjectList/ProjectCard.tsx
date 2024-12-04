@@ -32,7 +32,7 @@ const ProjectCard = ({ project, link }: { project: Model | Dataset; link: string
                 {/* <GoDotFill /> */}
                 <div className="flex ">
                   <span>
-                    Updated {formatDistanceToNow(project.repository.last_activity_at)} ago
+                     {formatDistanceToNow(project.created_at)} ago
                   </span>
                 </div>
                 {/* <GoDotFill /> */}

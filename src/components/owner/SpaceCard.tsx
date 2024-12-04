@@ -9,11 +9,9 @@ import Image from "next/image";
 
 const SpaceCard = ({
   space,
-  index,
   link
 }: {
   space: Space;
-  index: number;
   link: string;
 }) => {
   return (
