@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 
 const ProjectList = ({ rootPath, projectList }: { rootPath: string, projectList: (Model | Dataset)[] }) => {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sorting, setSorting] = useState<string>("trending");
   const { user } = useCurrentUser()
   const projectsQuery = useQuery({
     queryKey: ["projectsData"], queryFn: async () => {
@@ -30,14 +31,21 @@ const ProjectList = ({ rootPath, projectList }: { rootPath: string, projectList:
     }
     console.log(resp)
   }
+  let filteredList = projectList
+  if(searchQuery){
+    filteredList = filteredList.filter(d => d.repository.path_with_namespace.includes(searchQuery))
+  } 
+  if(sorting =="trending"){
+    filteredList = filteredList.sort((a,b)=>a.likes.count-b.likes.count)
+  }
   return (
     <div>
       <div className="py-10 px-10">
         {rootPath == "datasets" && <FilterProject />}
-        <SearchProject setSearchQuery={setSearchQuery} projects={projectList} />
+        <SearchProject setSearchQuery={setSearchQuery} projects={projectList} setSorting={setSorting}/>
         <div className="mb-4 p-4">
           <div className="grid grid-cols-4 gap-x-[3%] gap-y-10">
-            {projectList.filter(d => d.repository.path_with_namespace.includes(searchQuery)).map((item, index) => {
+            {filteredList.map((item, index) => {
               const newData = projectsQuery.data?.find(s=>s._id==item._id)
               const isLiked =user?._id && newData?.likes.users.includes(user._id )
               return <ProjectCard
