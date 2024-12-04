@@ -20,7 +20,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
     <main className="flex flex-col font-medium rounded-none">
       <section className="flex flex-col pt-5 pb-12 w-full rounded-2xl border border-solid border-zinc-900 max-md:max-w-full">
         <h1 className="self-start ml-12 text-2xl text-white max-md:ml-2.5">
-          Account Settings
+          Account Details
         </h1>
         <Divider />
         <form className="flex flex-col items-start px-12 mt-12 text-sm w-full  text-zinc-500 max-md:px-5 max-md:mt-10 max-md:max-w-full">
@@ -30,7 +30,7 @@ const AccountSettings: React.FC<AccountSettingsProps> = ({
             We will use this email to communicate with you. This is also the
             email to use to authenticate on abcd.com
           </p>
-          <Button text="Save Changes" />
+          {/* <Button text="Save Changes" /> */}
           {/* <Divider />
           <InputField
             label="Old password"
