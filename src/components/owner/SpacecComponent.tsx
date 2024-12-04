@@ -21,13 +21,13 @@ const SpacesComponent = (
     }
 ) => {
   const { user } = useCurrentUser()
-  const userSpacesQuery = useQuery({
-    queryKey: ["mySpaces"], queryFn: async () => {
-      const spacesResp = await authenticatedRequest.get("/spaces/me")
-      const data: Space[] = spacesResp.data
-      return data
-    }, enabled: !!user
-  })
+  // const userSpacesQuery = useQuery({
+  //   queryKey: ["mySpaces"], queryFn: async () => {
+  //     const spacesResp = await authenticatedRequest.get("/spaces/me")
+  //     const data: Space[] = spacesResp.data
+  //     return data
+  //   }, enabled: !!user
+  // })
   return (
     <section className="flex flex-col mb-10 px-[5%] py-10">
       {/* Search Bar */}
@@ -55,30 +55,6 @@ const SpacesComponent = (
             </button>
           </div>
         </div> */}
-      {
-        user && 
-        <>
-        <div className="w-full max-md:max-w-full">
-        <h2 className="mb-3 font-semibold">My Agents</h2>
-        {
-          userSpacesQuery.isLoading ? <div className="flex justify-center items-center text-center py-8">
-            <Spinner />
-          </div> : <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-[2%] gap-y-8 w-full">
-            {userSpacesQuery.data ? userSpacesQuery.data.filter(space => space.visibility == "private").map((spaceData, index) => (
-              <SpaceCard
-
-                key={spaceData._id}
-                link={`/spaces/${spaceData.repository.path_with_namespace}`}
-                space={spaceData}
-              />
-            )) : <><span>No agents found</span></>}
-          </div>
-        }
-      </div>
-      <div className="flex h-[1px] bg-gray-800 my-6"></div>
-        
-        </>
-      }
       <div className="w-full max-md:max-w-full">
         <h2 className="mb-3 font-semibold">Public Agents</h2>
 
@@ -88,7 +64,6 @@ const SpacesComponent = (
               key={spaceData._id}
               link={`/spaces/${spaceData.repository.path_with_namespace}`}
               space={spaceData}
-              index={index}
             />
           ))}
         </div>
