@@ -131,7 +131,7 @@ const Header = () => {
 
             {isProfilePopupOpen && (
               <div className="absolute top-14 right-0" ref={popupRef}>
-                <ProfilePopup setIsProfilePopupOpen={setIsProfilePopupOpen} />
+                <ProfilePopup setIsProfilePopupOpen={setIsProfilePopupOpen} username={user?.username || ""}/>
               </div>
             )}
           </div>

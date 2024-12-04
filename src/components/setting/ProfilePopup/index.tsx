@@ -4,8 +4,10 @@ import { useCurrentUser } from "@/hooks/user";
 
 const ProfileSettingsWrapper = ({
   setIsProfilePopupOpen,
+  username
 }: {
   setIsProfilePopupOpen: (value: React.SetStateAction<boolean>) => void;
+  username:string
 }) => {
   const { user } = useCurrentUser();
   const menuItems = [
@@ -14,7 +16,7 @@ const ProfileSettingsWrapper = ({
       link: "/setting/profile-setting",
       isHeader: true,
     },
-    { label: "Account Details", link: "/setting" },
+    { label: "My profile", link: "/"+username },
     { label: "Create New Access Token", link: "/setting/create-access-token" },
     { label: "Create Deployment", link: "/deployment/new" },
     { label: "Create Dataset", link: "/datasets/new" },
