@@ -61,16 +61,17 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  revalidatePath(`/datasets`, 'layout')
-  revalidatePath(`/models`, 'layout')
-  revalidatePath(`/spaces`, 'layout')
+  revalidatePath(`/datasets`, 'page')
+  revalidatePath(`/models`, 'page')
+  revalidatePath(`/spaces`, 'page')
+  revalidatePath(`/arena`, 'page')
   revalidatePath(`/[username]`, 'page')
-  revalidatePath(`/datasets/[owner]/[repoName]`, 'page')
-  revalidatePath(`/datasets/[owner]/[repoName]/tree/[branch]`, 'page')
-  revalidatePath(`/spaces/[owner]/[repoName]`, 'page')
-  revalidatePath(`/spaces/[owner]/[repoName]/tree/[branch]`, 'page')
-  revalidatePath(`/models/[owner]/[repoName]`, 'page')
-  revalidatePath(`/models/[owner]/[repoName]/tree/[branch]`, 'page')
+  // revalidatePath(`/datasets/[owner]/[repoName]`, 'page')
+  // revalidatePath(`/datasets/[owner]/[repoName]/tree/[branch]`, 'page')
+  // revalidatePath(`/spaces/[owner]/[repoName]`, 'page')
+  // revalidatePath(`/spaces/[owner]/[repoName]/tree/[branch]`, 'page')
+  // revalidatePath(`/models/[owner]/[repoName]`, 'page')
+  // revalidatePath(`/models/[owner]/[repoName]/tree/[branch]`, 'page')
   return NextResponse.json({
     success: true
   })
