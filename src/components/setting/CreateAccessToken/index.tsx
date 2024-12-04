@@ -109,6 +109,7 @@ const CreateAccessToken = () => {
               <div className="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
                 <CheckboxGroup
                   title="Repositories"
+                  isActive={true}
                   items={repositoryPermissions}
                 />
                 {/* <div className="mt-9">
