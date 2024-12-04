@@ -4,21 +4,7 @@ import { authenticatedRequest } from "@/config/request";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAuth } from "@/config/firebase";
 import { useQueryClient } from "@tanstack/react-query";
-
-interface User {
-  name: string;
-  firebase_uid: string;
-  username: string;
-  email: string;
-  socials: {
-    homepage?: string;
-    ai_ml_interests?: string;
-    github_username?: string;
-    twitter_username?: string;
-    linkedin_profile?: string;
-  };
-  display_photo?: string;
-}
+import { User } from "@/types/User";
 
 const fetchCurrentUser = async (): Promise<User> => {
   const response = await authenticatedRequest.get(
