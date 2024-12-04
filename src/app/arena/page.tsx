@@ -1,6 +1,7 @@
 import React from "react";
 import HomepageContent from "./components/HomepageContent";
 import { IArenaModel } from "@/types/Arena";
+import { publicRequest } from "@/config/request";
 
 export type InputParam = {
   type: "string" | "integer" | "number" | "file" | "select";
@@ -1036,10 +1037,10 @@ export const responseData = [
 
 
 export const getModelsData = async ()=>{
-    // const modelsMetaData = await publicRequest.get("/models")
+    const modelsMetaData = await publicRequest.get("/arena/models")
     return temporaryModelsData.map(temp=>{
-        // const total_runs =modelsMetaData.data.find((m:any)=>m.model_id==temp.model_id)?.total_runs
-        temp.total_runs =  0
+        const total_runs =modelsMetaData.data.find((m:any)=>m.model_id==temp.model_id)?.total_runs
+        temp.total_runs =total_runs ||  0
         return temp
     })
 }
