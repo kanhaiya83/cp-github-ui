@@ -70,7 +70,6 @@ const SpacesComponent = (
                 key={spaceData._id}
                 link={`/spaces/${spaceData.repository.path_with_namespace}`}
                 space={spaceData}
-                index={index}
               />
             )) : <><span>No agents found</span></>}
           </div>
