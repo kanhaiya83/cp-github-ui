@@ -8,7 +8,7 @@ const logIds = ['creating_cloud_infrastructure', 'initializing_environment', 'pu
 const LogsContainer = ({ status }: { status: string }) => {
   const foundStatusIndex = logIds.findIndex(s => s == status)
   let currentStatusIndex = foundStatusIndex != -1 ? foundStatusIndex : 4
-  if (status == "final_configuration_and_setup") {
+  if (status == "final_configuration_and_setup" || status=="success") {
     currentStatusIndex = 10
   }
 
