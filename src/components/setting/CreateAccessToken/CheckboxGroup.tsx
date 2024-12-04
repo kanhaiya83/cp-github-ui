@@ -28,10 +28,10 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             type="checkbox"
             id={item.name}
             name={item.name}
-            checked={title === "Inference"}
-            readOnly
-            disabled
-            className={`appearance-none text-sm shrink-0 rounded-sm border-2 mt-1 border-solid h-[15px] w-[15px] cursor-not-allowed ${
+            // checked={title === "Inference"}
+            // readOnly
+            // disabled
+            className={`appearance-none text-sm shrink-0 rounded-sm border-2 mt-1 border-solid h-[15px] w-[15px] ${
               isActive || title === "Inference"
                 ? "text-zinc-300 border-zinc-300 checked:bg-zinc-300 checked:border-zinc-300"
                 : "border-zinc-500 text-zinc-500 checked:bg-zinc-500 checked:border-zinc-500"

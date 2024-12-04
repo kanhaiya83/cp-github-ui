@@ -98,6 +98,46 @@ const CreateAccessToken = () => {
             <div>Write</div> */}
           </div>
           <div className="flex shrink-0 mt-3 h-0.5 rounded-sm w-[88px]" />
+          
+          <h2 className="text-base mt-8 font-semibold text-stone-300">
+            Use permissions
+          </h2>
+
+          <div className="mt-9 w-full max-w-[1139px] max-md:max-w-full">
+            <div className="flex gap-5 max-md:flex-col">
+              <div className="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
+                <CheckboxGroup
+                  title="Repositories"
+                  items={repositoryPermissions}
+                />
+                {/* <div className="mt-9">
+                  <CheckboxGroup title="Webhooks" items={webhookPermissions} />
+                </div>
+                <div className="mt-9">
+                  <CheckboxGroup
+                    title="Discussions & Posts"
+                    items={discussionPermissions}
+                  />
+                </div> */}
+              </div>
+              <div className="flex flex-col ml-5 w-[45%] max-md:ml-0 max-md:w-full">
+                <CheckboxGroup
+                  title="Inference"
+                  isActive={true}
+                  items={inferencePermissions}
+                />
+                {/* <div className="mt-9">
+                  <CheckboxGroup
+                    title="Collections"
+                    items={collectionPermissions}
+                  />
+                </div>
+                <div className="mt-9">
+                  <CheckboxGroup title="Billing" items={billingPermissions} />
+                </div> */}
+              </div>
+            </div>
+          </div>
           <p className="mt-4 text-base font-medium text-zinc-500">
             This cannot be changed after token creation.
           </p>
@@ -122,48 +162,9 @@ const CreateAccessToken = () => {
               </div>
             </div>
           </div>
-          <h2 className="text-base mt-8 font-semibold text-stone-300">
-            Use permissions
-          </h2>
-
-          <div className="mt-9 w-full max-w-[1139px] max-md:max-w-full">
-            <div className="flex gap-5 max-md:flex-col">
-              <div className="flex flex-col w-[55%] max-md:ml-0 max-md:w-full">
-                <CheckboxGroup
-                  title="Repositories"
-                  items={repositoryPermissions}
-                />
-                <div className="mt-9">
-                  <CheckboxGroup title="Webhooks" items={webhookPermissions} />
-                </div>
-                <div className="mt-9">
-                  <CheckboxGroup
-                    title="Discussions & Posts"
-                    items={discussionPermissions}
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col ml-5 w-[45%] max-md:ml-0 max-md:w-full">
-                <CheckboxGroup
-                  title="Inference"
-                  isActive={true}
-                  items={inferencePermissions}
-                />
-                <div className="mt-9">
-                  <CheckboxGroup
-                    title="Collections"
-                    items={collectionPermissions}
-                  />
-                </div>
-                <div className="mt-9">
-                  <CheckboxGroup title="Billing" items={billingPermissions} />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <hr className="shrink-0 mt-6 max-w-full h-px border border-solid border-zinc-800 w-[1471px]" />
-        <div className="flex flex-col items-start mt-8 ml-12 w-full text-base max-w-[1193px] text-zinc-500 max-md:max-w-full">
+        {/* <div className="flex flex-col items-start mt-8 ml-12 w-full text-base max-w-[1193px] text-zinc-500 max-md:max-w-full">
           <SectionHeader title="Repositories permissions" />
           <p className="self-stretch mt-2 mr-24 max-md:mr-2.5 max-md:max-w-full">
             Override any user-level or orgilevel permissions st below for the
@@ -198,7 +199,7 @@ const CreateAccessToken = () => {
               },
             ]}
           />
-        </div>
+        </div> */}
       </div>
     </form>
   );
