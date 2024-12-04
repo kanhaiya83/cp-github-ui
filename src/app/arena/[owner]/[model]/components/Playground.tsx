@@ -12,6 +12,7 @@ import { authenticatedRequest } from "@/config/request";
 import MetricsContainer from "./dynamicForm/MetricsContainer";
 import AudioWave from "./dynamicForm/AudioWave";
 import { IArenaModel } from "@/types/Arena";
+import Loader from "./Loader";
 
 interface OutputData {
   _id:string,
@@ -194,7 +195,7 @@ const OutputViewerContainer = ({
     <>
       {activeTab == "preview" ? (
         (loading? <div className="flex justify-center items-center mt-10 ">
-        "Loading..."
+        <Loader/>
       </div> :<ParsedOutput output={outputData.output} />)
       ) : (
         <div className="">
