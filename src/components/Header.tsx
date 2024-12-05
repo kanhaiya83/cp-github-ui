@@ -51,7 +51,7 @@ const Header = () => {
     if(!firebaseUser && !loading && !["login","signup"].includes(pathname)){
       router.push("/login")
     }
-  },[])
+  },[firebaseUser])
   return (
     <header className="bg-black sticky top-0 z-30 text-white flex justify-between items-center py-6 px-14 border-b border-[#201e27]">
       {/* Logo Section */}

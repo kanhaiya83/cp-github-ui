@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useQueryClient } from "@tanstack/react-query";
 import { firebaseAuth } from "@/config/firebase";
+import { useRouter } from "next/navigation";
 
 interface MenuItemProps {
   label: string;
@@ -18,10 +19,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   const className = isHeader ? "font-semibold text-stone-300" : "";
 
   const queryClient = useQueryClient();
+  const router = useRouter()
+
   const handleLogout = async () => {
     await firebaseAuth.signOut();
     queryClient.invalidateQueries({ queryKey: ["currentUser"] });
-  };
+    router.push("/login")
+    };
 
   return (
     <Tag className={className}>
