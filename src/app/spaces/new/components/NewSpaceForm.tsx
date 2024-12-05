@@ -838,10 +838,10 @@ const NewSpaceForm = () => {
 
         let error = "";
 
-        if (value.trim() === "") {
-            error = `${property} is required.`;
-            return;
-        }
+        // if (value.trim() === "") {
+        //     error = `${property} is required.`;
+        //     return;
+        // }
 
         if (property === "visibility" && !["public", "private"].includes(value)) {
             error = `Invalid visibility value. Expected "public" or "private".`;
@@ -865,9 +865,12 @@ const NewSpaceForm = () => {
     };
     const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        const response = await authenticatedRequest.post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/spaces`,
-            formState
+        const response = await toast.promise(
+            authenticatedRequest.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/spaces`,
+                formState
+            ),
+            {pending:"Creating your space.."}
         );
         const data = response.data;
         if (response.status == 201) {
@@ -898,7 +901,7 @@ const NewSpaceForm = () => {
                 </div>
                 <div>
                     <label className="block text-[#7B7A7F] mb-1" htmlFor="spaceName">
-                        Space name
+                        Agent name
                     </label>
                     <input
                         value={formState.name}
@@ -946,10 +949,10 @@ const NewSpaceForm = () => {
             {/* Space SDK */}
             <div className="">
                 <h3 className="block mt-8 text-lg text-[#CCCCCC] font-semibold">
-                    Select the Space SDK
+                    Select the Agent SDK
                 </h3>
                 <p className="text-sm text-[#858585]">
-                    You can choose between Streamlit, Gradio and Static for your Space.
+                    You can choose between Streamlit, Gradio and Static for your Agent.
                     Or pick Docker to host any other app.
                 </p>
 
@@ -998,7 +1001,7 @@ const NewSpaceForm = () => {
             <div className="mb-4 mt-8">
                 <div className="flex gap-2">
                     <label className="block text-[#CCCCCC] mb-1" htmlFor="hardware">
-                        Space hardware
+                        Agent hardware
                     </label>
                     {/* <button className="text-sm bg-[#28272D] border border-[#464549] px-3 rounded">
                         Free
@@ -1038,9 +1041,8 @@ const NewSpaceForm = () => {
                         <div>
                             <span className="text-gray-300">Public</span>
                             <p className="text-xs mt-1 text-[#858585]">
-                                Anyone on the internet can see this Space. Only you (personal
-                                Space) or members of your organization (organization Space)
-                                can commit.
+                                Anyone on the internet can see this agent. Only you (personal
+                                agent)
                             </p>
                         </div>
                     </label>
@@ -1059,11 +1061,10 @@ const NewSpaceForm = () => {
                         <div>
                             <span className="text-gray-300">Private</span>
                             <p className="text-xs mt-1 text-[#858585]">
-                                Only you (personal Space) or members of your organization
-                                (organization Space) can see and commit to this Space.
+                                Only you (personal Agent) can see and commit to this Agent.
                             </p>
                         </div>
-                    </label>
+                    </label>``
                 </div>
             </div>
 
@@ -1072,7 +1073,7 @@ const NewSpaceForm = () => {
                 type="submit"
                 className=" px-8 py-2 bg-gradient-to-r from-[#5CB6DA] to-[#9361E8]  rounded-md text-white font-semibold"
             >
-                Create Space
+                Create Agent
             </button>
         </form>
     )
