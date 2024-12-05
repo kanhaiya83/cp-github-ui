@@ -66,12 +66,12 @@ export async function GET(request: Request) {
   revalidatePath(`/spaces`, 'page')
   revalidatePath(`/arena`, 'page')
   revalidatePath(`/[username]`, 'page')
-  // revalidatePath(`/datasets/[owner]/[repoName]`, 'page')
-  // revalidatePath(`/datasets/[owner]/[repoName]/tree/[branch]`, 'page')
-  // revalidatePath(`/spaces/[owner]/[repoName]`, 'page')
-  // revalidatePath(`/spaces/[owner]/[repoName]/tree/[branch]`, 'page')
-  // revalidatePath(`/models/[owner]/[repoName]`, 'page')
-  // revalidatePath(`/models/[owner]/[repoName]/tree/[branch]`, 'page')
+  revalidatePath(`/datasets/[owner]/[repoName]`, 'page')
+  revalidatePath(`/datasets/[owner]/[repoName]/tree/[branch]`, 'page')
+  revalidatePath(`/spaces/[owner]/[repoName]`, 'page')
+  revalidatePath(`/spaces/[owner]/[repoName]/tree/[branch]`, 'page')
+  revalidatePath(`/models/[owner]/[repoName]`, 'page')
+  revalidatePath(`/models/[owner]/[repoName]/tree/[branch]`, 'page')
   return NextResponse.json({
     success: true
   })
