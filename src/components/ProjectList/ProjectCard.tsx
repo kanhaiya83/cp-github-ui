@@ -13,7 +13,7 @@ const ProjectCard = ({ project, link, queryData,
   handleLike }: {
     project: Model | Dataset; link: string, isLiked: boolean
     queryData?: Model | Dataset;
-    handleLike: (id: string) => Promise<void>
+    handleLike: any
   }) => {
   return (
       <article className="flex flex-col text-sm leading-none rounded-none relative ">

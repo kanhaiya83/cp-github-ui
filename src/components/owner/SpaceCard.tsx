@@ -21,7 +21,7 @@ const SpaceCard = ({
   link: string;
   isLiked:boolean
   queryData?: Space;
-  handleLike:(id:string)=>Promise<void>
+  handleLike:any
 }) => {
   return (
     <div className="h-full flex flex-col card-hover-effect px-4 py-2 relative">
