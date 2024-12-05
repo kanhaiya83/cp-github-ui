@@ -48,7 +48,7 @@ const Header = () => {
     };
   }, []);
   useEffect(()=>{
-    if(!firebaseUser && !loading && !["login","signup"].includes(pathname)){
+    if(!firebaseUser && !loading && !["login","signup","spaces","datasets","models"].includes(pathname)){
       router.push("/login")
     }
   },[firebaseUser])
