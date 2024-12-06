@@ -54,7 +54,7 @@ const SidebarContent = ({modelsData}:{modelsData:ModelType[]}) => {
                 {selectedOption == d.id && (
                     <div className="mt-2 space-y-2 rounded-md px-8">
                         {selectedOptionsModels.map((model,i)=>{
-                            return <Link href={`/${model.owner}/${model.title}`} key={i} className="w-full block py-2 cursor-pointer hover:bg-[#0e0d15] text-left rounded">
+                            return <Link href={`/arena/${model.owner}/${model.title}`} key={i} className="w-full block py-2 cursor-pointer hover:bg-[#0e0d15] text-left rounded">
                             <span>{model.title}</span>
                         </Link>
                         })}
