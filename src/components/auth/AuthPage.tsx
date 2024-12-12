@@ -12,6 +12,7 @@ import {
 import { toast } from "react-toastify";
 import Link from "next/link";
 import withAuthRedirect from "./withAuthRedirect";
+import { useRouter } from "next/navigation";
 
 interface AuthPageContentProps {
   type: "login" | "signup";
@@ -21,6 +22,7 @@ function AuthPageContent({ type }: AuthPageContentProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
@@ -53,8 +55,11 @@ function AuthPageContent({ type }: AuthPageContentProps) {
       }
       const idToken = await userCredential.user.getIdToken();
       console.log("ID Token:", idToken);
-      // toast.update(toastId, { render: (userCredential.user.emailVerified ? (type === 'login' ? "Logged in successfully!" : "Signed up successfully!") : "A verification email has been sent to your email! Please verify your email"), type: "success", isLoading: false, autoClose: 5000 });
+      
+      toast.update(toastId, { render: (userCredential.user.emailVerified ? (type === 'login' ? "Logged in successfully!" : "Signed up successfully!") : "A verification email has been sent to your email! Please verify your email"), type: "success", isLoading: false, autoClose: 5000 });
+      
       // Handle successful login/signup and token verification here
+      router.push(type === 'login' ? '/' : '/login');
     } catch (error) {
       setError(
         type === "login" ? "Invalid email or password" : "Sign up failed"
