@@ -1,17 +1,34 @@
+"use client"
 import { Space } from '@/types/Space'
 import React from 'react'
 import { MdError } from "react-icons/md";
 
 import { FaCheck } from 'react-icons/fa6'
 import { Hourglass, Oval } from 'react-loader-spinner'
+import { useQuery } from '@tanstack/react-query';
+import { publicRequest } from '@/config/request';
 const logIds = ['creating_cloud_infrastructure', 'initializing_environment', 'pushing_code_to_repository', 'building_docker_image', 'deploying_docker_image_to_cloud', 'adding_ssl_certificate', 'final_configuration_and_setup']
-const LogsContainer = ({ status }: { status: string }) => {
+const LogsContainer = ({ data }: { data: Space }) => {
+  const statusQuery = useQuery({
+    queryKey: [`status-${data._id}`], queryFn: async () => {
+      const resp = await publicRequest(`/spaces/${data._id}`)
+      const respData: Space = resp.data
+      return respData.status
+    }, refetchInterval: 2 * 1000
+  })
+  console.log({ statusQuery })
+  const status = statusQuery.data
   const foundStatusIndex = logIds.findIndex(s => s == status)
   let currentStatusIndex = foundStatusIndex != -1 ? foundStatusIndex : 4
-  if (status == "final_configuration_and_setup" || status=="success") {
+  if (status == "final_configuration_and_setup" || status == "success") {
     currentStatusIndex = 10
   }
 
+  if(statusQuery.isLoading){
+    return <LoadingIcon/>
+  }
+  
+  
   const isError = status == "error"
   return (
     <div className='py-6 px-[5%]'>
@@ -21,13 +38,13 @@ const LogsContainer = ({ status }: { status: string }) => {
           logIds.map((id, index) => {
             return <li key={id} className='flex items-center gap-2'>
 
-             {(isError && index>=currentStatusIndex) ?
-             <div>
-<ErrorIcon/>
-             </div>
-             : <div>
-                {index > currentStatusIndex ? <LoadingIcon /> : (index == currentStatusIndex ? <LoadingIcon /> : <TickIcon />)}
-              </div>}
+              {(isError && index >= currentStatusIndex) ?
+                <div>
+                  <ErrorIcon />
+                </div>
+                : <div>
+                  {index > currentStatusIndex ? <LoadingIcon /> : (index == currentStatusIndex ? <LoadingIcon /> : <TickIcon />)}
+                </div>}
               <span className={`text-2xl font-medium capitalize ${index < currentStatusIndex && "text-green-500"} ${index > currentStatusIndex && "text-orange-500 opacity-35"} ${index == currentStatusIndex && "text-white"}`}>{id.replaceAll("_", " ")}</span>
             </li>
           })

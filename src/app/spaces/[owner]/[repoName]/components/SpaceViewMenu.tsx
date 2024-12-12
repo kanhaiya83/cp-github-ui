@@ -7,14 +7,16 @@ import { FaGitAlt } from "react-icons/fa";
 import { HiOutlineDocumentDuplicate } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import { IoCopy } from "react-icons/io5";
+import { Space } from "@/types/Space";
+import LogsContainer from "./LogsContainer";
 
-const CloneRepositoryModal = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const CloneRepositoryModal = ({ setIsModalOpen , data }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>> , data: Space}) => {
   const [cloneMethod, setCloneMethod] = useState<"https" | "ssh">("https");
-  const [httpsCommand, setHttpsCommand] = useState("git clone https://huggingface.co/spaces/kanhaiya47/rgergr");
-  const [sshCommand, setSshCommand] = useState("git clone git@huggingface.co:spaces/kanhaiya47/rgergr.git");
-  const [skipLfsCommand, setSkipLfsCommand] = useState(cloneMethod === "https"
-    ? "GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/spaces/kanhaiya47/rgergr"
-    : "GIT_LFS_SKIP_SMUDGE=1 git clone git@huggingface.co:spaces/kanhaiya47/rgergr.git"
+  const httpsCommand = `git clone ${data.repository.http_url_to_repo}`
+  const sshCommand = `git clone ${data.repository.ssh_url_to_repo}`
+  const skipLfsCommand = (cloneMethod === `https`
+    ? `GIT_LFS_SKIP_SMUDGE=1 git clone ${data.repository.http_url_to_repo}`
+    : `GIT_LFS_SKIP_SMUDGE=1 git clone ${data.repository.ssh_url_to_repo}`
   );
 
   const handleCopy = async (command: string) => {
@@ -252,7 +254,7 @@ const DuplicateSpaceModal = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatc
   );
 };
 
-const LogsModal = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const LogsModal = ({ setIsModalOpen , data }: { setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>> ,data:Space}) => {
   const [isVisible, setIsVisible] = useState(false);
   const logs = [
     "[INFO] App started successfully...",
@@ -289,11 +291,12 @@ const LogsModal = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatch<React.Se
 
         <div className="mt-4 text-gray-300">
           <pre className="bg-zinc-700 rounded-md p-4 text-sm">
-            {logs.map((log, index) => (
+            {/* {logs.map((log, index) => (
               <div key={index}>
                 {log}
               </div>
-            ))}
+            ))} */}
+            <LogsContainer data={data}/>
           </pre>
         </div>
       </div>
@@ -301,7 +304,7 @@ const LogsModal = ({ setIsModalOpen }: { setIsModalOpen: React.Dispatch<React.Se
   );
 };
 
-const SpaceViewMenu = () => {
+const SpaceViewMenu = ({data}:{data:Space}) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isCloneModalOpen, setIsCloneModalOpen] = useState(false);
   const [isLogsModalOpen, setIsLogsModalOpen] = useState(false);
@@ -326,19 +329,19 @@ const SpaceViewMenu = () => {
     <>
       <div className="flex items-center gap-2 absolute top-0 -translate-y-[125%] right-4">
 
-        <button
+        {/* <button
           className="hidden sm:flex items-center text-white border-2 rounded-lg hover:bg-gray-700 text-sm border-gray-700 px-4 py-2"
           onClick={() => { }}
         >
           <MdApps className="mr-2" size={20} /> App
-        </button>
+        </button> */}
 
-        <button
+        {/* <button
           className="hidden sm:flex items-center text-white border-2 rounded-lg hover:bg-gray-700 text-sm border-gray-700 px-4 py-2"
           onClick={() => { }}
         >
           <FiFile className="mr-2" size={20} /> Files
-        </button>
+        </button> */}
 
         <button
           className="hidden sm:flex items-center text-white border-2 rounded-lg hover:bg-gray-700 text-sm border-gray-700 px-4 py-2"
@@ -390,20 +393,20 @@ const SpaceViewMenu = () => {
                   <FaGitAlt className="mr-2" size={20} /> Clone Repository
                 </li>
 
-                <li
+                {/* <li
                   className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer"
                   onClick={() => { setIsDuplicateSpaceModalOpen(true) }}
                 >
                   <HiOutlineDocumentDuplicate className="mr-2" size={20} /> Duplicate this Space
-                </li>
+                </li> */}
               </ul>
             </div>
           )}
         </div>
       </div>
 
-      {isCloneModalOpen && <CloneRepositoryModal setIsModalOpen={setIsCloneModalOpen} />}
-      {isLogsModalOpen && <LogsModal setIsModalOpen={setIsLogsModalOpen} />}
+      {isCloneModalOpen && <CloneRepositoryModal data={data} setIsModalOpen={setIsCloneModalOpen} />}
+      {isLogsModalOpen && <LogsModal data={data} setIsModalOpen={setIsLogsModalOpen} />}
       {isDuplicateSpaceModelOpen && <DuplicateSpaceModal setIsModalOpen={setIsDuplicateSpaceModalOpen} />}
 
     </>
