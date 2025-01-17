@@ -17,6 +17,7 @@ const ProjectCard = ({ project, link, queryData,
   }) => {
   return (
       <article className="flex flex-col text-sm leading-none rounded-none relative ">
+        <button className=" absolute top-3 left-3 border-[2px] text-green-600 border-green-600 text-xs font-font-semibold border rounded-sm  px-[2px]">Tokenized</button>
         {/* Top-left Half Border */}
         {/* <div className="absolute top-0 left-0 h-1/2 w-1/2 border-t border-l border-[#62626A] pointer-events-none rounded-l"></div> */}
 
