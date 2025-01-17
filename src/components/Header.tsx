@@ -7,6 +7,7 @@ import ProfilePopup from "./setting/ProfilePopup";
 import { useCurrentUser } from "@/hooks/user";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
   const router = useRouter();
@@ -107,6 +108,7 @@ const Header = () => {
               >
                 Login
               </button>
+              
             </div>
           )}
           <div className="flex relative  items-center justify-center gap-2 ">
@@ -135,6 +137,7 @@ const Header = () => {
               </div>
             )}
           </div>
+          <ConnectButton/>
           {/* <img src="/asset/logo.svg" alt="Logo" /> */}
         </div>
       </div>    </header>

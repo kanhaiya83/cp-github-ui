@@ -5,6 +5,8 @@ import ReactQueryProvider from "@/provider/QueryClient";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.min.css"
 import Header from "@/components/Header";
+import { WagmiProvider } from 'wagmi';
+import RainbowProvider, { wagmiConfig } from "@/provider/RainbowProvider";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -31,10 +33,15 @@ export default function RootLayout({
       <body
         className={`bg-[#0a0a0a] text-white ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ReactQueryProvider>
-          <Header/>
-          {children}</ReactQueryProvider>
-        <ToastContainer/>
+        <WagmiProvider config={wagmiConfig}>
+          <ReactQueryProvider>
+            <RainbowProvider>
+            <Header />
+            {children}
+            </RainbowProvider>
+            </ReactQueryProvider>
+            </WagmiProvider>
+          <ToastContainer />
       </body>
     </html>
   );

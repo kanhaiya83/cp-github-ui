@@ -27,7 +27,7 @@ const RepositoryViewContainer = ({
           <DatasetInfo owner={owner} repoName={repoName} />
           {tagsData && <DatasetTags tagsData={tagsData} />}
           {rootPath === "spaces" ? null : (
-            <DatasetNavigation pathname={pathname} rootPath={rootPath} />
+            <DatasetNavigation pathname={pathname} rootPath={rootPath} tokenized_id={7}/>
           )}
         </div>
         {children}
