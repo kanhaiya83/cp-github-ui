@@ -4,6 +4,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import useDatasetAccess from "@/hooks/useDatasetAccess";
 import { access } from "fs";
+import { useAccount } from "wagmi";
 
 interface NavItem {
   isActive: boolean;
@@ -24,7 +25,7 @@ const DatasetNavigation = ({
 }) => {
 
 
-
+  const account = useAccount()
   const currentPath = usePathname();
   const navItems: NavItem[] = [
     {
@@ -71,7 +72,7 @@ const DatasetNavigation = ({
     </nav>
     {
       // @ts-expect-error
-      (!accessData.access && accessData?.formattedDataset?.prices) && <div className="flex gap-2 justify-center w-full mb-6">
+      (!accessData.access && accessData?.formattedDataset?.prices && !account.isConnecting) && <div className="flex gap-2 justify-center w-full mb-6">
       {/* @ts-expect-error */}
         <button className="bg-blue-500 text-white font-semibold px-3 py-2 rounded-md "  onClick={()=>{accessData?.purchaseDataset("full")}}>Buy Full Access {accessData.formattedDataset.prices.fullAccessPrice} {accessData.formattedDataset.paymentUnit}</button>
       {/* @ts-expect-error */}
