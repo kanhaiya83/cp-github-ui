@@ -8,17 +8,26 @@ import { useCurrentUser } from "@/hooks/user";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useCookies } from 'react-cookie';
 
 const Header = () => {
   const router = useRouter();
   const [isProfilePopupOpen, setIsProfilePopupOpen] = React.useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
+  const [cookies, setCookie, removeCookie] = useCookies(['firebase-token']);
+
   const { user ,loading , firebaseUser} = useCurrentUser();
   const pathname =usePathname()
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       setIsUserLoggedIn(!!user);
+      if(user){
+        user.getIdToken().then(token=>setCookie("firebase-token",token));
+      }
+      else{
+        removeCookie("firebase-token")
+      }
     });
 
     // Cleanup subscription on unmount

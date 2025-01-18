@@ -17,7 +17,7 @@ const units = {
 const DEFAULT_TOKEN_ID = 3
 
 const getPrice = (dataset: any, accessType: string) => {
-  console.log({accessType})
+  console.log("getPrice()",{accessType,dataset})
   // Get the base price amount
   let price;
   switch (accessType) {
@@ -35,16 +35,18 @@ const getPrice = (dataset: any, accessType: string) => {
   }
 
   // Convert based on payment mode
-  if (dataset.paymentMode === BigInt(0)) {
+  if (BigInt(dataset.paymentMode) === BigInt(0)) {
     // ETH
     // return parseEther(price.toString());
     return price
-  } else if (dataset.paymentMode === BigInt(1)) {
+  } else if (BigInt(dataset.paymentMode) === BigInt(1)) {
     // USDT
-    return parseUnits(price.toString(), 6); // USDT uses 6 decimals
+    // return parseUnits(price.toString(), 6); // USDT uses 6 decimals
+    return price
   } else {
     // CLUSTER or Custom Token (using 18 decimals)
-    return parseEther(price.toString());
+    // return parseEther(price.toString());
+    return price
   }
 };
 
@@ -110,15 +112,15 @@ const useDatasetAccess = (pathname: string, type: string) => {
       prices: {
         fullAccessPrice: formatUnits(
           tokenized_dataset[8].fullAccessPrice,
-          tokenized_dataset[6] === BigInt(1) ? 6 : 18
+          BigInt(tokenized_dataset[6]) === BigInt(1) ? 6 : 18
         ),
         d2cAccessPrice: formatUnits(
           tokenized_dataset[8].d2cAccessPrice,
-          tokenized_dataset[6] === BigInt(1) ? 6 : 18
+          BigInt(tokenized_dataset[6]) === BigInt(1) ? 6 : 18
         ),
         expiryAccessPrice: formatUnits(
           tokenized_dataset[8].expiryAccessPrice,
-          tokenized_dataset[6] === BigInt(1) ? 6 : 18
+          BigInt(tokenized_dataset[6]) === BigInt(1) ? 6 : 18
         ),
       },
       // expiryDuration: tokenized_dataset.expiryDuration?.toString(),
@@ -164,7 +166,7 @@ console.log(datasetTokenData)
         await ethSigner.getAddress()
       );
       console.log("User Token Balance:", balance.toString());
-
+      console.log({balance,price})
       if (balance < price) {
         throw new Error("Insufficient token balance");
       }
